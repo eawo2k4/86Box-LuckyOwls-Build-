@@ -174,6 +174,5 @@
         <file alias="toshiba_t1000.png">qt/assets/systemicons/toshiba_t1000.png</file>
         <file alias="toshiba_t1200.png">qt/assets/systemicons/toshiba_t1200.png</file>
         <file alias="toshiba_t1200_hdd.png">qt/assets/systemicons/toshiba_t1200_hdd.png</file>
-
     </qresource>
 </RCC>

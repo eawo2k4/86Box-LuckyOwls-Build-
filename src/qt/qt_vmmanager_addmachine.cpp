@@ -43,11 +43,10 @@ VMManagerAddMachine::VMManagerAddMachine(QWidget *parent)
 #endif
 
 #ifdef Q_OS_WINDOWS
-    setMinimumSize(QSize(550, size().height()));
-    setMaximumSize(QSize(550, size().height()));
+    setFixedSize(QSize(550, 400)); // Or whatever height you want
     setWindowFlag(Qt::MSWindowsFixedSizeDialogHint, true);
 #else
-    setMinimumSize(size());
+    setFixedSize(QSize(550, 400));
 #endif
 
     setOption(HaveHelpButton, false);
