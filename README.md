@@ -1,8 +1,9 @@
 # 86Box – LuckyOwl Custom Build
 
 ![License](https://img.shields.io/github/license/eawo2k4/86Box-LuckyOwls-Build-?style=flat-square)
+![Build](https://img.shields.io/badge/build-Wizard%20Edition-blue?style=flat-square)
 ![Release](https://img.shields.io/github/v/release/eawo2k4/86Box-LuckyOwls-Build-?style=flat-square)
-![Downloads](https://img.shields.io/github/downloads/eawo2k4/86Box-LuckyOwls-Build-/total?style=flat-square)
+
 
 A customized fork of the 86Box emulator featuring an enhanced New Machine Wizard, improved UI flow, and quality‑of‑life refinements designed to make virtual machine setup smoother, clearer, and more beginner‑friendly.
 
