@@ -1,17 +1,3 @@
-/*
- * 86Box    A hypervisor and IBM PC system emulator that specializes in
- *          running old operating systems and software designed for IBM
- *          PC systems and compatibles from 1981 through fairly recent
- *          system designs based on the PCI bus.
- *
- *          This file is part of the 86Box distribution.
- *
- *          Header for 86Box VM manager add machine wizard
- *
- * Authors: cold-brewed
- *
- *          Copyright 2024 cold-brewed
- */
 #ifndef QT_VMMANAGER_ADDMACHINE_H
 #define QT_VMMANAGER_ADDMACHINE_H
 
@@ -21,9 +7,11 @@
 #include <QRadioButton>
 #include <QRegularExpression>
 #include <QWizard>
+#include <QComboBox>
 
-// Implementation note: There are several classes in this header:
-// One for the main Wizard class and one for each page of the wizard
+/* =====================================================================
+ *  VMManagerAddMachine Wizard
+ * ===================================================================== */
 
 class VMManagerAddMachine final : public QWizard {
     Q_OBJECT
@@ -31,14 +19,18 @@ class VMManagerAddMachine final : public QWizard {
 public:
     enum {
         Page_Intro,
-        Page_Fresh,
         Page_WithExistingConfig,
+        Page_OSSelect,
         Page_NameAndLocation,
         Page_Conclusion
     };
 
     explicit VMManagerAddMachine(QWidget *parent = nullptr);
 };
+
+/* =====================================================================
+ *  Intro Page
+ * ===================================================================== */
 
 class IntroPage : public QWizardPage {
     Q_OBJECT
@@ -53,20 +45,54 @@ private:
     QRadioButton *existingConfigRadioButton;
 };
 
+/* =====================================================================
+ *  OS Selection Page (NEW)
+ * ===================================================================== */
+
+class OSSelectPage final : public QWizardPage {
+    Q_OBJECT
+
+public:
+    explicit OSSelectPage(QWidget *parent = nullptr);
+
+    [[nodiscard]] int  nextId() const override;
+    [[nodiscard]] bool isComplete() const override;
+
+    QString selectedFamily() const;
+    QString selectedVersion() const;
+
+private slots:
+    void updateVersionList(const QString &family);
+    void updateWarning(const QString &version);
+
+private:
+    QLabel    *osFamilyLabel;
+    QLabel    *osVersionLabel;
+    QComboBox *osFamilyCombo;
+    QComboBox *osVersionCombo;
+    QLabel    *warningLabel;
+};
+
+/* =====================================================================
+ *  WithExistingConfigPage
+ * ===================================================================== */
+
 class WithExistingConfigPage final : public QWizardPage {
     Q_OBJECT
     Q_PROPERTY(QString configuration READ configuration WRITE setConfiguration NOTIFY configurationChanged)
 
 public:
     explicit WithExistingConfigPage(QWidget *parent = nullptr);
-    // These extra functions are required to register QPlainTextEdit fields
+
     [[nodiscard]] QString configuration() const;
     void                  setConfiguration(const QString &configuration);
+
 signals:
     void configurationChanged(const QString &configuration);
 
 private:
     QPlainTextEdit *existingConfiguration;
+
 private slots:
     void chooseExistingConfigFile();
 
@@ -74,6 +100,10 @@ protected:
     [[nodiscard]] int  nextId() const override;
     [[nodiscard]] bool isComplete() const override;
 };
+
+/* =====================================================================
+ *  NameAndLocationPage
+ * ===================================================================== */
 
 class NameAndLocationPage final : public QWizardPage {
     Q_OBJECT
@@ -84,33 +114,27 @@ public:
 
 private:
     QLineEdit *systemName;
-#ifdef CUSTOM_SYSTEM_LOCATION
-    QLineEdit *systemLocation;
-#endif
     QLineEdit *displayName;
     QLabel    *systemNameValidation;
-#ifdef CUSTOM_SYSTEM_LOCATION
-    QLabel            *systemLocationValidation;
-    QRegularExpression dirValidate;
-private slots:
-    void chooseDirectoryLocation();
-#endif
+
 protected:
     [[nodiscard]] bool isComplete() const override;
     bool               eventFilter(QObject *watched, QEvent *event) override;
 };
 
+/* =====================================================================
+ *  Conclusion Page
+ * ===================================================================== */
+
 class ConclusionPage final : public QWizardPage {
     Q_OBJECT
+
 public:
     explicit ConclusionPage(QWidget *parent = nullptr);
 
 private:
     QLabel *topLabel;
     QLabel *systemName;
-#ifdef CUSTOM_SYSTEM_LOCATION
-    QLabel *systemLocation;
-#endif
     QLabel *displayNameLabel;
     QLabel *displayName;
 
