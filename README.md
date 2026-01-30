@@ -1,4 +1,4 @@
-a# 86Box – LuckyOwl Custom Build
+ 86Box – LuckyOwl Custom Build
 
 ![License](https://img.shields.io/github/license/eawo2k4/86Box-LuckyOwls-Build-?style=flat-square)
 ![Build](https://img.shields.io/badge/build-Wizard%20Edition-blue?style=flat-square)
@@ -33,8 +33,7 @@ A modernized setup flow that guides users through creating a new virtual machine
 
 - **Updated Internal Logic**  
   Refined `nextId()` behavior and enum handling for smoother navigation.
-  **Added USB Passthrough**
-  Protoype USB Passthrough works it can be very unstabel I recommened Using at least Windows98SE or Windows 2000 or even a Linux Distro for it to work.
+ 
 
 This fork focuses on user experience while preserving full compatibility with upstream 86Box.
 
