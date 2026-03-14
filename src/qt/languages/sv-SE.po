@@ -1,8 +1,14 @@
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2026-03-10 14:03+0000\n"
+"Last-Translator: OBattler <oubattler@gmail.com>\n"
+"Language-Team: Swedish <https://weblate.86box.net/projects/86box/86box/sv/>\n"
+"Language: sv-SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 "X-Language: sv_SE\n"
 "X-Source-Language: en_US\n"
 
@@ -345,6 +351,15 @@ msgstr "Höjd:"
 msgid "Lock to this size"
 msgstr "Lås till denna storlek"
 
+msgid "General"
+msgstr "Allmänt"
+
+msgid "Processor"
+msgstr "Processor"
+
+msgid "Performance"
+msgstr "Prestanda"
+
 msgid "Machine type:"
 msgstr "Maskintyp:"
 
@@ -366,8 +381,14 @@ msgstr "Hastighet:"
 msgid "Frequency:"
 msgstr "Frekvens:"
 
+msgid "%1 MHz"
+msgstr "%1 MHz"
+
 msgid "FPU:"
 msgstr "Flyttalsprocessor:"
+
+msgid "Internal"
+msgstr "Integrerad"
 
 msgid "Wait states:"
 msgstr "Väntcykler:"
@@ -390,6 +411,9 @@ msgstr "Aktiverad (lokal tid)"
 msgid "Enabled (UTC)"
 msgstr "Aktiverad (UTC)"
 
+msgid "Use the 486 interpreter for 286 and 386 processors"
+msgstr "Använd 486-tolken för 286- och 386-processorer"
+
 msgid "Dynamic Recompiler"
 msgstr "Dynamisk omkompilering"
 
@@ -407,6 +431,9 @@ msgstr "Bildskärmskort:"
 
 msgid "Video #2:"
 msgstr "Bildskärmskort #2:"
+
+msgid "Accelerators"
+msgstr "Acceleratorer"
 
 msgid "Voodoo 1 or 2 Graphics"
 msgstr "Voodoo 1 eller 2-grafik"
@@ -477,8 +504,8 @@ msgstr "Fristående MPU-401"
 msgid "Use FLOAT32 sound"
 msgstr "Använd FLOAT32-ljud"
 
-msgid "FM synth driver"
-msgstr "Drivrutin för FM-synt"
+msgid "FM synth driver:"
+msgstr "Drivrutin för FM-synt:"
 
 msgid "Nuked (more accurate)"
 msgstr "Nuked (mer exakt)"
@@ -615,8 +642,8 @@ msgstr "Avbildningsformat:"
 msgid "Block Size:"
 msgstr "Blockstorlek:"
 
-msgid "Floppy drives:"
-msgstr "Diskettenhet:"
+msgid "Floppy drives"
+msgstr "Diskettenhet"
 
 msgid "Turbo timings"
 msgstr "Turbo timings"
@@ -624,23 +651,26 @@ msgstr "Turbo timings"
 msgid "Check BPB"
 msgstr "Kontrollera BPB"
 
-msgid "CD-ROM drives:"
-msgstr "CD-ROM-enheter:"
+msgid "CD-ROM drives"
+msgstr "CD-ROM-enheter"
 
-msgid "MO drives:"
-msgstr "MO-enheter:"
+msgid "MO drives"
+msgstr "MO-enheter"
 
 msgid "MO:"
 msgstr "MO:"
 
+msgid "Removable disk drives"
+msgstr "Enheter för flyttbara diskar"
+
 msgid "Removable disks:"
 msgstr "Flyttbara diskar:"
 
-msgid "Removable disk drives:"
-msgstr "Enheter för flyttbara diskar:"
+msgid "Tape drives"
+msgstr "Bandenhet"
 
-msgid "ZIP 250"
-msgstr "ZIP 250"
+msgid "Tape drives:"
+msgstr "Bandenhet:"
 
 msgid "ISA RTC:"
 msgstr "ISA realtidsklocka:"
@@ -698,6 +728,15 @@ msgstr "&Flyttbar disk %1 (%2): %3"
 
 msgid "Removable disk images"
 msgstr "Flyttbara disk-avbildningar"
+
+msgid "Tape %1 (%2): %3"
+msgstr "Band %1 (%2): %3"
+
+msgid "&Tape %1 (%2): %3"
+msgstr "&Band %1 (%2): %3"
+
+msgid "Tape images"
+msgstr "Band-avbildningar"
 
 msgid "Image %1"
 msgstr "Avbildning %1"
@@ -762,8 +801,14 @@ msgstr "Portar (COM & LPT)"
 msgid "Ports"
 msgstr "Portar"
 
+msgid "Serial ports"
+msgstr "Serieportar"
+
 msgid "Serial ports:"
 msgstr "Serieportar:"
+
+msgid "Parallel ports"
+msgstr "Parallelportar"
 
 msgid "Parallel ports:"
 msgstr "Parallelportar:"
@@ -810,14 +855,8 @@ msgstr "Buss"
 msgid "File"
 msgstr "Fil"
 
-msgid "C"
-msgstr "C"
-
-msgid "H"
-msgstr "H"
-
-msgid "S"
-msgstr "S"
+msgid "Geometry"
+msgstr "Geometri"
 
 msgid "KB"
 msgstr "KB"
@@ -1578,6 +1617,9 @@ msgstr "1.5% under perfekt varv/min"
 msgid "2% below perfect RPM"
 msgstr "2& under perfekt varm/min"
 
+msgid "Creating image…"
+msgstr "Skapar avbildning…"
+
 msgid "(System Default)"
 msgstr "(Systemstandard)"
 
@@ -1780,7 +1822,7 @@ msgid "VDE Socket:"
 msgstr "VDE-sockel:"
 
 msgid "TAP Bridge Device:"
-msgstr ""
+msgstr "TAP-bryggaenhet:"
 
 msgid "86Box Unit Tester"
 msgstr "86Box enhetsprövare"
@@ -2173,16 +2215,16 @@ msgid "WSS DMA"
 msgstr "WSS DMA"
 
 msgid "RTC IRQ"
-msgstr ""
+msgstr "IRQ för RTC"
 
 msgid "RTC Port Address"
-msgstr ""
+msgstr "Portadress för RTC"
 
 msgid "Onboard RTC"
-msgstr ""
+msgstr "Inbyggd RTC"
 
 msgid "Not installed"
-msgstr ""
+msgstr "Ej installerad"
 
 msgid "Enable OPL"
 msgstr "Aktivera OPL"
@@ -2667,6 +2709,12 @@ msgstr "Hög påverkan på prestanda"
 msgid "[Generic] RAM Disk (max. speed)"
 msgstr "[Allmän] RAM-disk (max hastighet)"
 
+msgid "[Generic] 1983 MFM (3600 RPM)"
+msgstr "[Allmän] 1983 MFM (3600 varv/min)"
+
+msgid "[Generic] 1983 RLL (3600 RPM)"
+msgstr "[Allmän] 1983 RLL (3600 varv/min)"
+
 msgid "[Generic] 1989 (3500 RPM)"
 msgstr "[Allmän] 1989 (3500 varv/min)"
 
@@ -2769,8 +2817,8 @@ msgstr "Flytta ner"
 msgid "Could not load file %1"
 msgstr "Kunde inte ladda fil %1"
 
-msgid "Key Bindings:"
-msgstr "Tangentbindningar:"
+msgid "Key bindings"
+msgstr "Tangentbindningar"
 
 msgid "Action"
 msgstr "Handling"
@@ -2806,7 +2854,7 @@ msgid "Toggle fullscreen"
 msgstr "Helskärm"
 
 msgid "Toggle UI in fullscreen"
-msgstr ""
+msgstr "Växla UI till helskärmsläge"
 
 msgid "Release mouse pointer"
 msgstr "Släpp muspekare"
@@ -2832,8 +2880,8 @@ msgstr "Lokal switch"
 msgid "Remote Switch"
 msgstr "Fjärr-switch"
 
-msgid "Switch:"
-msgstr "Switch:"
+msgid "Shared secret:"
+msgstr "Delad hemlighet:"
 
 msgid "Hub Mode"
 msgstr "Hubb-läge"
@@ -3010,10 +3058,13 @@ msgid "&Allow recompilation"
 msgstr "&Tillåt omkompilering"
 
 msgid "&Fast forward"
-msgstr ""
+msgstr "&Spola fram"
 
 msgid "Fast forward"
-msgstr ""
+msgstr "Spola fram"
 
 msgid "To change the system directory, stop all running machines."
-msgstr ""
+msgstr "ör att ändra systemkatalogen, stoppa alla maskiner som är körs."
+
+msgid "Raw"
+msgstr "Rå"
