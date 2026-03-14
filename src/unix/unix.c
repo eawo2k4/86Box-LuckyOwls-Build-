@@ -63,7 +63,7 @@ int             update_icons;
 int             kbd_req_capture;
 int             hide_status_bar;
 int             hide_tool_bar;
-bool            fast_forward = false; // Technically unused.
+bool            fast_forward = false;
 int             fixed_size_x = 640;
 int             fixed_size_y = 480;
 extern int      title_set;
@@ -1098,13 +1098,16 @@ unix_executeLine(char *line)
                 "rdiskload <id> <filename> <wp> - Load removable disk image into removable disk drive <id>.\n"
                 "cartload <id> <filename> <wp> - Load cartridge image into cartridge drive <id>.\n"
                 "moload <id> <filename> <wp> - Load MO image into MO drive <id>.\n\n"
+                "tapeload <id> <filename> <wp> - Load tape image into tape drive <id>.\n\n"
                 "fddeject <id> - eject disk from floppy drive <id>.\n"
                 "cdeject <id> - eject disc from CD-ROM drive <id>.\n"
                 "rdiskeject <id> - eject removable disk image from removable disk drive <id>.\n"
                 "carteject <id> - eject cartridge from drive <id>.\n"
                 "moeject <id> - eject image from MO drive <id>.\n\n"
+                "tapeeject <id> - eject image from tape drive <id>.\n\n"
                 "hardreset - hard reset the emulated system.\n"
                 "pause - pause the the emulated system.\n"
+                "fastfwd - toggle fast forward.\n"
                 "screenshot - save a screenshot.\n"
                 "fullscreen - toggle fullscreen.\n"
                 "version - print version and license information.\n"
@@ -1154,6 +1157,9 @@ unix_executeLine(char *line)
         } else if (strncasecmp(xargv[0], "pause", 5) == 0) {
             plat_pause(dopause ^ 1);
             printf("%s", dopause ? "Paused.\n" : "Unpaused.\n");
+        } else if (strncasecmp(xargv[0], "fastfwd", 7) == 0) {
+            fast_forward ^= 1;
+            printf("%s", fast_forward ? "Fast forward on.\n" : "Fast forward off.\n");
         } else if (strncasecmp(xargv[0], "hardreset", 9) == 0) {
             pc_reset_hard();
         } else if (strncasecmp(xargv[0], "cdload", 6) == 0 && cmdargc >= 3) {
@@ -1202,14 +1208,16 @@ unix_executeLine(char *line)
             }
         } else if (strncasecmp(xargv[0], "fddeject", 8) == 0 && cmdargc >= 2) {
             floppy_eject(atoi(xargv[1]));
-        } else if (strncasecmp(xargv[0], "cdeject", 8) == 0 && cmdargc >= 2) {
+        } else if (strncasecmp(xargv[0], "cdeject", 7) == 0 && cmdargc >= 2) {
             cdrom_mount(atoi(xargv[1]), "");
-        } else if (strncasecmp(xargv[0], "moeject", 8) == 0 && cmdargc >= 2) {
+        } else if (strncasecmp(xargv[0], "moeject", 7) == 0 && cmdargc >= 2) {
             mo_eject(atoi(xargv[1]));
-        } else if (strncasecmp(xargv[0], "carteject", 8) == 0 && cmdargc >= 2) {
+        } else if (strncasecmp(xargv[0], "carteject", 9) == 0 && cmdargc >= 2) {
             cartridge_eject(atoi(xargv[1]));
-        } else if (strncasecmp(xargv[0], "rdiskeject", 8) == 0 && cmdargc >= 2) {
+        } else if (strncasecmp(xargv[0], "rdiskeject", 10) == 0 && cmdargc >= 2) {
             rdisk_eject(atoi(xargv[1]));
+        } else if (strncasecmp(xargv[0], "tapeeject", 9) == 0 && cmdargc >= 2) {
+            tape_eject(atoi(xargv[1]));
         } else if (strncasecmp(xargv[0], "fddload", 7) == 0 && cmdargc >= 4) {
             uint8_t id;
             uint8_t wp;
@@ -1230,7 +1238,7 @@ unix_executeLine(char *line)
                 printf("Inserting disk into floppy drive %c: %s\n", id + 'A', fn);
                 floppy_mount(id, fn, wp);
             }
-        } else if (strncasecmp(xargv[0], "moload", 7) == 0 && cmdargc >= 4) {
+        } else if (strncasecmp(xargv[0], "moload", 6) == 0 && cmdargc >= 4) {
             uint8_t id;
             uint8_t wp;
             bool    err = false;
@@ -1250,7 +1258,7 @@ unix_executeLine(char *line)
                 printf("Inserting into mo drive %hhu: %s\n", id, fn);
                 mo_mount(id, fn, wp);
             }
-        } else if (strncasecmp(xargv[0], "cartload", 7) == 0 && cmdargc >= 4) {
+        } else if (strncasecmp(xargv[0], "cartload", 8) == 0 && cmdargc >= 4) {
             uint8_t id;
             uint8_t wp;
             bool    err = false;
@@ -1270,7 +1278,7 @@ unix_executeLine(char *line)
                 printf("Inserting tape into cartridge holder %hhu: %s\n", id, fn);
                 cartridge_mount(id, fn, wp);
             }
-        } else if (strncasecmp(xargv[0], "rdiskload", 7) == 0 && cmdargc >= 4) {
+        } else if (strncasecmp(xargv[0], "rdiskload", 9) == 0 && cmdargc >= 4) {
             uint8_t id;
             uint8_t wp;
             bool    err = false;
@@ -1289,6 +1297,26 @@ unix_executeLine(char *line)
                     fn[strlen(fn) - 1] = '\0';
                 printf("Inserting disk into removable disk drive %c: %s\n", id + 'A', fn);
                 rdisk_mount(id, fn, wp);
+            }
+        } else if (strncasecmp(xargv[0], "tapeload", 8) == 0 && cmdargc >= 4) {
+            uint8_t id;
+            uint8_t wp;
+            bool    err = false;
+            char    fn[PATH_MAX];
+
+            memset(fn, 0, sizeof(fn));
+
+            if (!xargv[2] || !xargv[1]) {
+                free(linecpy);
+                return;
+            }
+            err = process_media_commands_3(&id, fn, &wp, xargv, cmdargc);
+            if (!err) {
+                if (fn[strlen(fn) - 1] == '\''
+                    || fn[strlen(fn) - 1] == '"')
+                    fn[strlen(fn) - 1] = '\0';
+                printf("Inserting disk into tape drive %c: %s\n", id + 'A', fn);
+                tape_mount(id, fn, wp);
             }
         }
         free(linecpy);

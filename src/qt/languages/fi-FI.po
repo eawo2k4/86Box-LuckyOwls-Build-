@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-29 09:54+0000\n"
+"PO-Revision-Date: 2026-03-12 16:30+0000\n"
 "Last-Translator: Daniel Gurney <daniel@gurney.dev>\n"
 "Language-Team: Finnish <https://weblate.86box.net/projects/86box/86box/fi/>\n"
 "Language: fi-FI\n"
@@ -210,14 +210,26 @@ msgstr "&Päivitä tilapalkin kuvakkeita"
 msgid "Take s&creenshot"
 msgstr "Ota &kuvakaappaus"
 
+msgid "Take screenshot"
+msgstr "Ota kuvakaappaus"
+
 msgid "Take &raw screenshot"
 msgstr "Ota &raaka kuvakaappaus"
+
+msgid "Take raw screenshot"
+msgstr "Ota raaka kuvakaappaus"
 
 msgid "C&opy screenshot"
 msgstr "K&opioi kuvakaappaus"
 
+msgid "Copy screenshot"
+msgstr "Kopioi kuvakaappaus"
+
 msgid "Copy r&aw screenshot"
 msgstr "Kopioi r&aaka kuvakaappaus"
+
+msgid "Copy raw screenshot"
+msgstr "Kopioi raaka kuvakaappaus"
 
 msgid "S&ound"
 msgstr "&Ääni"
@@ -339,6 +351,15 @@ msgstr "Korkeus:"
 msgid "Lock to this size"
 msgstr "Lukitse tähän kokoon"
 
+msgid "General"
+msgstr "Yleinen"
+
+msgid "Processor"
+msgstr "Prosessori"
+
+msgid "Performance"
+msgstr "Suorituskyky"
+
 msgid "Machine type:"
 msgstr "Tietokoneen tyyppi:"
 
@@ -360,8 +381,14 @@ msgstr "Nopeus:"
 msgid "Frequency:"
 msgstr "Taajuus:"
 
+msgid "%1 MHz"
+msgstr "%1 MHz"
+
 msgid "FPU:"
 msgstr "Apusuoritin:"
+
+msgid "Internal"
+msgstr "Sisäinen"
 
 msgid "Wait states:"
 msgstr "Odotustilat:"
@@ -384,6 +411,9 @@ msgstr "Käytössä (paikallinen)"
 msgid "Enabled (UTC)"
 msgstr "Käytössä (UTC)"
 
+msgid "Use the 486 interpreter for 286 and 386 processors"
+msgstr "Käytä 486-tulkintaa 286- ja 386-prosessoreille"
+
 msgid "Dynamic Recompiler"
 msgstr "Dynaaminen uudelleenkääntäjä"
 
@@ -401,6 +431,9 @@ msgstr "Näytönohjain:"
 
 msgid "Video #2:"
 msgstr "Toinen näytönohjain:"
+
+msgid "Accelerators"
+msgstr "Kiihdyttimet"
 
 msgid "Voodoo 1 or 2 Graphics"
 msgstr "Voodoo 1 tai 2-grafiikkasuoritin"
@@ -471,8 +504,8 @@ msgstr "Erillinen MPU-401"
 msgid "Use FLOAT32 sound"
 msgstr "Käytä FLOAT32-ääntä"
 
-msgid "FM synth driver"
-msgstr "FM-syntetisaattoriohjain"
+msgid "FM synth driver:"
+msgstr "FM-syntetisaattoriohjain:"
 
 msgid "Nuked (more accurate)"
 msgstr "Nuked (tarkempi)"
@@ -537,11 +570,11 @@ msgstr "Levykeohjain:"
 msgid "CD-ROM controller:"
 msgstr "CD-ohjain:"
 
-msgid "[ISA16] Tertiary IDE Controller"
-msgstr "[ISA16] Kolmas IDE-ohjain"
+msgid "Tertiary IDE Controller"
+msgstr "Kolmas IDE-ohjain"
 
-msgid "[ISA16] Quaternary IDE Controller"
-msgstr "[ISA16] Neljäs IDE-ohjain"
+msgid "Quaternary IDE Controller"
+msgstr "Neljäs IDE-ohjain"
 
 msgid "Hard disk controllers"
 msgstr "Kiintolevyohjaimet"
@@ -609,8 +642,8 @@ msgstr "Tiedostomuoto:"
 msgid "Block Size:"
 msgstr "Lohkon koko:"
 
-msgid "Floppy drives:"
-msgstr "Levykeasemat:"
+msgid "Floppy drives"
+msgstr "Levykeasemat"
 
 msgid "Turbo timings"
 msgstr "Turbo-ajoitukset"
@@ -618,23 +651,26 @@ msgstr "Turbo-ajoitukset"
 msgid "Check BPB"
 msgstr "Tarkista BPB"
 
-msgid "CD-ROM drives:"
-msgstr "CD-ROM-asemat:"
+msgid "CD-ROM drives"
+msgstr "CD-ROM-asemat"
 
-msgid "MO drives:"
-msgstr "Magneettisoptiset asemat (MO):"
+msgid "MO drives"
+msgstr "Magneettisoptiset asemat (MO)"
 
 msgid "MO:"
-msgstr ""
+msgstr "MO:"
+
+msgid "Removable disk drives"
+msgstr "Irrotettavat levyasemat"
 
 msgid "Removable disks:"
 msgstr "Irrotettavat levyt:"
 
-msgid "Removable disk drives:"
-msgstr "Irrotettavat levyasemat:"
+msgid "Tape drives"
+msgstr "Nauha-asemat"
 
-msgid "ZIP 250"
-msgstr "ZIP 250"
+msgid "Tape drives:"
+msgstr "Nauha-asemat:"
 
 msgid "ISA RTC:"
 msgstr "ISA-RTC (kello):"
@@ -692,6 +728,15 @@ msgstr "&Irrotettava levy %1 (%2): %3"
 
 msgid "Removable disk images"
 msgstr "Irrotettavat levykuvat"
+
+msgid "Tape %1 (%2): %3"
+msgstr "Nauha %1 (%2): %3"
+
+msgid "&Tape %1 (%2): %3"
+msgstr "&Nauha %1 (%2): %3"
+
+msgid "Tape images"
+msgstr "Nauhamediat"
 
 msgid "Image %1"
 msgstr "Levykuva %1"
@@ -756,8 +801,14 @@ msgstr "Portit (COM & LPT)"
 msgid "Ports"
 msgstr "Portit"
 
+msgid "Serial ports"
+msgstr "Sarjaportit"
+
 msgid "Serial ports:"
 msgstr "Sarjaportit:"
+
+msgid "Parallel ports"
+msgstr "Rinnakkaisportit"
 
 msgid "Parallel ports:"
 msgstr "Rinnakkaisportit:"
@@ -804,14 +855,8 @@ msgstr "Väylä"
 msgid "File"
 msgstr "Tiedosto"
 
-msgid "C"
-msgstr "C"
-
-msgid "H"
-msgstr "H"
-
-msgid "S"
-msgstr "S"
+msgid "Geometry"
+msgstr "Geometria"
 
 msgid "KB"
 msgstr "Kt"
@@ -1069,7 +1114,7 @@ msgid "Pause execution"
 msgstr "Pysäytä suoritus"
 
 msgid "Ctrl+Alt+Del"
-msgstr ""
+msgstr "Ctrl+Alt+Del"
 
 msgid "Press Ctrl+Alt+Del"
 msgstr "Paina Ctrl+Alt+Del"
@@ -1143,8 +1188,8 @@ msgstr "Valittua määritystä ei voitu avata: %1"
 msgid "Use regular expressions in search box"
 msgstr "Käytä säännöllisiä lausekkeita (regex) hakukentässä"
 
-msgid "%1 machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
-msgstr "%1 konetta on tällä hetkellä aktiivisena. Haluatko silti sulkea virtuaalikoneiden hallinnan?"
+msgid "%n machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
+msgstr "%n konetta on tällä hetkellä aktiivisena. Haluatko silti sulkea virtuaalikoneiden hallinnan?"
 
 msgid "Add new system wizard"
 msgstr "Koneenlisäysohjelma"
@@ -1226,9 +1271,6 @@ msgstr "Anna uusi näyttönimi tai poista se"
 
 msgid "Change &display name…"
 msgstr "Vaihda &näyttönimi…"
-
-msgid "Context Menu"
-msgstr "Kontekstivalikko"
 
 msgid "&Open folder…"
 msgstr "&Avaa kansio…"
@@ -1575,6 +1617,9 @@ msgstr "1.5% alle täydellisen RPM:n"
 msgid "2% below perfect RPM"
 msgstr "2% alle täydellisen RPM:n"
 
+msgid "Creating image…"
+msgstr "Luodaan levykuvaa…"
+
 msgid "(System Default)"
 msgstr "(Järjestelmän oletus)"
 
@@ -1834,7 +1879,7 @@ msgid "Microsoft Serial Mouse"
 msgstr "Microsoft-sarjahiiri"
 
 msgid "Microsoft Serial BallPoint"
-msgstr ""
+msgstr "Microsoft BallPoint-sarjahiiri"
 
 msgid "Logitech Serial Mouse"
 msgstr "Logitech-sarjahiiri"
@@ -1851,8 +1896,8 @@ msgstr "3M MicroTouch (sarja)"
 msgid "Default Baud rate"
 msgstr "Oletussiirtonopeus"
 
-msgid "[COM] Standard Hayes-compliant Modem"
-msgstr "[COM] Tavallinen Hayes-yhteensopiva modeemi"
+msgid "Standard Hayes-compliant Modem"
+msgstr "Tavallinen Hayes-yhteensopiva modeemi"
 
 msgid "Roland MT-32 Emulation"
 msgstr "Roland MT-32-emulointi"
@@ -1921,7 +1966,7 @@ msgid "Enable BIOS extension ROM Writes (ROM #4)"
 msgstr "Salli BIOS-laajennuksen ROM-kirjoitukset (ROM #4)"
 
 msgid "Linear framebuffer base"
-msgstr ""
+msgstr "Lineaarisen kehyspuskurin perusosoite"
 
 msgid "Address"
 msgstr "Osoite"
@@ -1951,7 +1996,7 @@ msgid "IBM 5161 Expansion Unit"
 msgstr "IBM 5161-laajennusyksikkö"
 
 msgid "IBM Cassette Basic"
-msgstr ""
+msgstr "IBM Cassette Basic"
 
 msgid "Translate 26 -> 17"
 msgstr "Muunna 26 -> 17"
@@ -2170,7 +2215,7 @@ msgid "WSS DMA"
 msgstr "WSS-DMA"
 
 msgid "RTC IRQ"
-msgstr ""
+msgstr "RTC:n IRQ"
 
 msgid "RTC Port Address"
 msgstr "RTC-portin osoite"
@@ -2371,10 +2416,10 @@ msgid "Linear"
 msgstr "Lineaarinen"
 
 msgid "4th Order"
-msgstr ""
+msgstr "4. kertaluku"
 
 msgid "7th Order"
-msgstr ""
+msgstr "7. kertaluku"
 
 msgid "Non-timed (original)"
 msgstr "Ajastamaton (alkuperäinen)"
@@ -2572,7 +2617,7 @@ msgid "3Dfx Voodoo Graphics"
 msgstr "3dfx Voodoo-grafiikkasuoritin"
 
 msgid "3Dfx Voodoo 2"
-msgstr ""
+msgstr "3Dfx Voodoo 2"
 
 msgid "Obsidian SB50 + Amethyst (2 TMUs)"
 msgstr "Obsidian SB50 + Amethyst (2 TMU:ta)"
@@ -2664,6 +2709,12 @@ msgstr "Merkittävä vaikutus suorituskykyyn"
 msgid "[Generic] RAM Disk (max. speed)"
 msgstr "[Yleinen] RAM-levy (maksiminopeus)"
 
+msgid "[Generic] 1983 MFM (3600 RPM)"
+msgstr "[Yleinen] 1983 MFM (3600 RPM)"
+
+msgid "[Generic] 1983 RLL (3600 RPM)"
+msgstr "[Yleinen] 1983 RLL (3600 RPM)"
+
 msgid "[Generic] 1989 (3500 RPM)"
 msgstr "[Yleinen] 1989 (3500 RPM)"
 
@@ -2692,10 +2743,10 @@ msgid "Vendor"
 msgstr "Valmistaja"
 
 msgid "30 Hz (JMP2 = 1)"
-msgstr ""
+msgstr "30 Hz (JMP2 = 1)"
 
 msgid "60 Hz (JMP2 = 2)"
-msgstr ""
+msgstr "60 Hz (JMP2 = 2)"
 
 msgid "Generic PC/XT Memory Expansion"
 msgstr "Yleinen PC/XT-muistilaajennus"
@@ -2766,8 +2817,8 @@ msgstr "Siirrä alas"
 msgid "Could not load file %1"
 msgstr "Tiedostoa %1 ei voitu ladata"
 
-msgid "Key Bindings:"
-msgstr "Pikanäppäimet:"
+msgid "Key bindings"
+msgstr "Pikanäppäimet"
 
 msgid "Action"
 msgstr "Toiminto"
@@ -2805,9 +2856,6 @@ msgstr "Koko näyttö"
 msgid "Toggle UI in fullscreen"
 msgstr "Käyttöliittymä koko näyttö-tilassa"
 
-msgid "Screenshot"
-msgstr "Kuvakaappaus"
-
 msgid "Release mouse pointer"
 msgstr "Vapauta hiiren osoitin"
 
@@ -2832,8 +2880,8 @@ msgstr "Paikallinen kytkin"
 msgid "Remote Switch"
 msgstr "Etäkytkin"
 
-msgid "Switch:"
-msgstr "Kytkin:"
+msgid "Shared secret:"
+msgstr "Jaettu salaisuus:"
 
 msgid "Hub Mode"
 msgstr "Hubitila"
@@ -2890,7 +2938,7 @@ msgid "stable"
 msgstr "vakaa"
 
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 msgid "You are running the latest %1 version of 86Box: %2"
 msgstr "Sinulla on käytössä uusin %1-versio 86Boxista: %2"
@@ -3010,4 +3058,13 @@ msgid "&Allow recompilation"
 msgstr "&Salli uudelleenkääntäminen"
 
 msgid "&Fast forward"
-msgstr ""
+msgstr "&Pikakelaus"
+
+msgid "Fast forward"
+msgstr "Pikakelaus"
+
+msgid "To change the system directory, stop all running machines."
+msgstr "Järjestelmähakemiston muuttamiseksi pysäytä kaikki käynnissä olevat koneet."
+
+msgid "Raw"
+msgstr "Raaka"

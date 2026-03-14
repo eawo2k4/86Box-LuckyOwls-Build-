@@ -120,6 +120,126 @@ device_set_context(device_context_t *ctx, const device_t *dev, int inst)
         void *      old_sec    = config_find_section("Microsoft RAMCard for IBM PC");
         if ((sec == NULL) && (old_sec != NULL))
             config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1007V-SE1 (ESDI)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "Western Digital WD1007V-SE1 (ESDI)" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("Western Digital WD1007V-SE1 (ESDI)");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1003 AT (MFM/RLL)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1003 AT MFM/RLL Controller" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1003 AT MFM/RLL Controller");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "ST-11R (RLL)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "ST-11R RLL Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("ST-11R RLL Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1002A-WX1 (MFM)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1002A-WX1 MFM Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1002A-WX1 MFM Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1002A-WX1 (MFM) (No BIOS)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1002A-WX1 MFM Fixed Disk Adapter (No BIOS)" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1002A-WX1 MFM Fixed Disk Adapter (No BIOS)");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1002A-27X (RLL)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1002A-27X RLL Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1002A-27X RLL Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1004A-WX1 (MFM)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1004A-WX1 MFM Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1004A-WX1 MFM Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1004-27X (RLL)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1004-27X RLL Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1004-27X RLL Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WD1004a-27X (RLL)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WD1004a-27X RLL Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WD1004a-27X RLL Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "Victor V86P (RLL)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "Victor V86P RLL Fixed Disk Adapter" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("Victor V86P RLL Fixed Disk Adapter");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WDXT-150 (XTA)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WDXT-150 XTA Fixed Disk Controller" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WDXT-150 XTA Fixed Disk Controller");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "WDXT-150 (XTA) (PC3086)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "WDXT-150 XTA Fixed Disk Controller (PC3086)" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("WDXT-150 XTA Fixed Disk Controller (PC3086)");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "ST-50X (XTA)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "ST-50X Fixed Disk Controller" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("ST-50X Fixed Disk Controller");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "ST-50X (XTA) (PC5086)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "ST-50X Fixed Disk Controller (PC5086)" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("ST-50X Fixed Disk Controller (PC5086)");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);
+    } else if (!strcmp(dev->name, "Acculogic sIDE-1/16 (IDE)")) {
+        sprintf(ctx->name, "%s", dev->name);
+
+        /* Migrate the old "Acculogic XT IDE" section */
+        const void *sec        = config_find_section(ctx->name);
+        void *      old_sec    = config_find_section("Acculogic XT IDE");
+        if ((sec == NULL) && (old_sec != NULL))
+            config_rename_section(old_sec, ctx->name);    
     } else
         sprintf(ctx->name, "%s", dev->name);
 }
@@ -483,6 +603,61 @@ device_has_config(const device_t *dev)
     return (c > 0) ? 1 : 0;
 }
 
+const char *
+device_get_bus_name(const device_t *dev)
+{
+    const char *sbus = NULL;
+
+    if ((dev->flags & (DEVICE_SIDECAR | DEVICE_ISA)) == (DEVICE_SIDECAR | DEVICE_ISA))
+        sbus = "ISA/Sidecar";
+    else if (dev->flags & DEVICE_SIDECAR)
+        sbus = "Sidecar";
+    else if (dev->flags & DEVICE_XT_KBC)
+        sbus = "XT KBC";
+    else if (dev->flags & DEVICE_ISA16)
+        sbus = "ISA16";
+    else if (dev->flags & DEVICE_AT_KBC)
+        sbus = "AT KBC";
+    else if (dev->flags & DEVICE_PS2_KBC)
+        sbus = "PS/2 KBC";
+    else if (dev->flags & DEVICE_ISA)
+        sbus = "ISA";
+    else if (dev->flags & DEVICE_CBUS)
+        sbus = "C-BUS";
+    else if (dev->flags & DEVICE_PCMCIA)
+        sbus = "PCMCIA";
+    else if (dev->flags & DEVICE_MCA)
+        sbus = "MCA";
+    else if (dev->flags & DEVICE_MCA32)
+        sbus = "MCA32";
+    else if (dev->flags & DEVICE_HIL)
+        sbus = "HP HIL";
+    else if (dev->flags & DEVICE_EISA)
+        sbus = "EISA";
+    else if (dev->flags & DEVICE_AT32)
+        sbus = "AT/32";
+    else if (dev->flags & DEVICE_OLB)
+        sbus = "OLB";
+    else if (dev->flags & DEVICE_VLB)
+        sbus = "VLB";
+    else if (dev->flags & DEVICE_PCI)
+        sbus = "PCI";
+    else if (dev->flags & DEVICE_CARDBUS)
+        sbus = "CardBus";
+    else if (dev->flags & DEVICE_USB)
+        sbus = "USB";
+    else if (dev->flags & DEVICE_AGP)
+        sbus = "AGP";
+    else if (dev->flags & DEVICE_AC97)
+        sbus = "AMR";
+    else if (dev->flags & DEVICE_COM)
+        sbus = "COM";
+    else if (dev->flags & DEVICE_LPT)
+        sbus = "LPT";
+
+    return sbus;
+}
+
 void
 device_get_name(const device_t *dev, int bus, char *name)
 {
@@ -497,59 +672,15 @@ device_get_name(const device_t *dev, int bus, char *name)
     name[0] = 0x00;
 
     if (bus) {
-        if ((dev->flags & (DEVICE_SIDECAR | DEVICE_ISA)) ==
-            (DEVICE_SIDECAR | DEVICE_ISA))
-            sbus = "ISA/Sidecar";
-        else if (dev->flags & DEVICE_SIDECAR)
-            sbus = "Sidecar";
-        else if (dev->flags & DEVICE_XT_KBC)
-            sbus = "XT KBC";
-        else if (dev->flags & DEVICE_ISA16)
-            sbus = "ISA16";
-        else if (dev->flags & DEVICE_AT_KBC)
-            sbus = "AT KBC";
-        else if (dev->flags & DEVICE_PS2_KBC)
-            sbus = "PS/2 KBC";
-        else if (dev->flags & DEVICE_ISA)
-            sbus = "ISA";
-        else if (dev->flags & DEVICE_CBUS)
-            sbus = "C-BUS";
-        else if (dev->flags & DEVICE_PCMCIA)
-            sbus = "PCMCIA";
-        else if (dev->flags & DEVICE_MCA)
-            sbus = "MCA";
-        else if (dev->flags & DEVICE_MCA32)
-            sbus = "MCA32";
-        else if (dev->flags & DEVICE_HIL)
-            sbus = "HP HIL";
-        else if (dev->flags & DEVICE_EISA)
-            sbus = "EISA";
-        else if (dev->flags & DEVICE_AT32)
-            sbus = "AT/32";
-        else if (dev->flags & DEVICE_OLB)
-            sbus = "OLB";
-        else if (dev->flags & DEVICE_VLB)
-            sbus = "VLB";
-        else if (dev->flags & DEVICE_PCI)
-            sbus = "PCI";
-        else if (dev->flags & DEVICE_CARDBUS)
-            sbus = "CardBus";
-        else if (dev->flags & DEVICE_USB)
-            sbus = "USB";
-        else if (dev->flags & DEVICE_AGP)
-            sbus = "AGP";
-        else if (dev->flags & DEVICE_AC97)
-            sbus = "AMR";
-        else if (dev->flags & DEVICE_COM)
-            sbus = "COM";
-        else if (dev->flags & DEVICE_LPT)
-            sbus = "LPT";
+        sbus = device_get_bus_name(dev);
 
         if (sbus != NULL) {
             /* First concatenate [<Bus>] before the device's name. */
-            strcat(name, "[");
-            strcat(name, sbus);
-            strcat(name, "] ");
+            if (bus > 0) {
+                strcat(name, "[");
+                strcat(name, sbus);
+                strcat(name, "] ");
+            }
 
             /* Then change string from ISA16 to ISA if applicable. */
             if (!strcmp(sbus, "ISA16"))

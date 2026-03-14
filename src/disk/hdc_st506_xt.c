@@ -522,16 +522,14 @@ st506_callback(void *priv)
                     if (!drive->present) {
                         st506_error(dev, dev->nr_err);
                         st506_complete(dev);
-                        break;
+                    } else {
+                        double seek_us = hdd_seek_get_time(&hdd[drive->hdd_num], 0, HDD_OP_SEEK, 0, 0.0);
+                        timer_advance_u64(&dev->timer, (uint64_t)(seek_us * TIMER_USEC));
+
+                        dev->cylinder   = dev->cyl_off;
+                        drive->cylinder = dev->cylinder;
+                        dev->state      = STATE_DONE;
                     }
-
-                    /* Wait 20msec. */
-                    timer_advance_u64(&dev->timer, ST506_TIME_MS * 20);
-
-                    dev->cylinder   = dev->cyl_off;
-                    drive->cylinder = dev->cylinder;
-                    dev->state      = STATE_DONE;
-
                     break;
 
                 case STATE_DONE:
@@ -734,7 +732,8 @@ read_error_start:
                         dev->buff_cnt += 4;
                     dev->status = STAT_BSY | STAT_IO | STAT_REQ;
                     if (dev->irq_dma & DMA_ENA) {
-                        timer_advance_u64(&dev->timer, ST506_TIME);
+                        double seek_us = hdd_seek_get_time(&hdd[drive->hdd_num], (uint32_t) addr, HDD_OP_READ, 0, 0.0);
+                        timer_advance_u64(&dev->timer, (uint64_t)(seek_us * TIMER_USEC));
                         dma_set_drq(dev->dma, 1);
                     }
                     dev->state = STATE_SEND_DATA;
@@ -786,7 +785,8 @@ read_error_sent:
                     dev->buff_cnt = SECTOR_SIZE;
                     dev->status   = STAT_BSY | STAT_IO | STAT_REQ;
                     if (dev->irq_dma & DMA_ENA) {
-                        timer_advance_u64(&dev->timer, ST506_TIME);
+                        double seek_us = hdd_seek_get_time(&hdd[drive->hdd_num], (uint32_t) addr, HDD_OP_READ, 1, 0.0);
+                        timer_advance_u64(&dev->timer, (uint64_t)(seek_us * TIMER_USEC));
                         dma_set_drq(dev->dma, 1);
                     }
                     dev->state = STATE_SEND_DATA;
@@ -835,7 +835,8 @@ read_error_sent:
                         dev->buff_cnt += 4;
                     dev->status = STAT_BSY | STAT_REQ;
                     if (dev->irq_dma & DMA_ENA) {
-                        timer_advance_u64(&dev->timer, ST506_TIME);
+                        double seek_us = hdd_seek_get_time(&hdd[drive->hdd_num], (uint32_t) addr, HDD_OP_WRITE, 0, 0.0);
+                        timer_advance_u64(&dev->timer, (uint64_t)(seek_us * TIMER_USEC));
                         dma_set_drq(dev->dma, 1);
                     }
                     dev->state = STATE_RECEIVE_DATA;
@@ -889,7 +890,8 @@ write_error:
                     dev->buff_cnt = SECTOR_SIZE;
                     dev->status   = STAT_BSY | STAT_REQ;
                     if (dev->irq_dma & DMA_ENA) {
-                        timer_advance_u64(&dev->timer, ST506_TIME);
+                        double seek_us = hdd_seek_get_time(&hdd[drive->hdd_num], (uint32_t) addr, HDD_OP_WRITE, 1, 0.0);
+                        timer_advance_u64(&dev->timer, (uint64_t)(seek_us * TIMER_USEC));
                         dma_set_drq(dev->dma, 1);
                     }
                     dev->state = STATE_RECEIVE_DATA;
@@ -901,15 +903,40 @@ write_error:
             break;
 
         case CMD_SEEK:
-            if (drive->present) {
-                val = get_chs(dev, drive);
-                st506_xt_log("ST506: SEEK(%i, %i) [%i]\n",
-                             dev->drive_sel, drive->cylinder, val);
-                if (!val)
-                    st506_error(dev, ERR_SEEK_ERROR);
-            } else
-                st506_error(dev, dev->nr_err);
-            st506_complete(dev);
+            switch (dev->state) {
+                case STATE_START_COMMAND:
+                    st506_xt_log("ST506: RECALIBRATE(%i) [%i]\n",
+                                 dev->drive_sel, drive->present);
+                    if (!drive->present) {
+                        st506_error(dev, dev->nr_err);
+                        st506_complete(dev);
+                    } else {
+                        val = get_chs(dev, drive);
+
+                        if (val) {
+                            if (get_sector(dev, drive, &addr)) {
+                                double seek_us = hdd_seek_get_time(&hdd[drive->hdd_num], addr, HDD_OP_SEEK, 0, 0.0);
+                                timer_advance_u64(&dev->timer, (uint64_t)(seek_us * TIMER_USEC));
+
+                                dev->state      = STATE_DONE;
+                            } else {
+                                st506_error(dev, ERR_BAD_PARAMETER);
+                                st506_complete(dev);
+                            }
+                        } else {
+                            st506_error(dev, ERR_SEEK_ERROR);
+                            st506_complete(dev);
+                        }
+                    }
+                    break;
+
+                case STATE_DONE:
+                    st506_complete(dev);
+                    break;
+
+                default:
+                    break;
+            }
             break;
 
         case CMD_SPECIFY:
@@ -2283,7 +2310,7 @@ const device_t st506_xt_xebec_device = {
 };
 
 const device_t st506_xt_wdxt_gen_device = {
-    .name          = "Western Digital WDXT-GEN (MFM)",
+    .name          = "WDXT-GEN (MFM)",
     .internal_name = "st506_xt_gen",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WDXT_GEN,
@@ -2297,7 +2324,7 @@ const device_t st506_xt_wdxt_gen_device = {
 };
 
 const device_t st506_xt_dtc5150x_device = {
-    .name          = "DTC 5150X MFM Fixed Disk Adapter",
+    .name          = "DTC 5150X (MFM)",
     .internal_name = "st506_xt_dtc5150x",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_DTC_5150X,
@@ -2311,7 +2338,7 @@ const device_t st506_xt_dtc5150x_device = {
 };
 
 const device_t st506_xt_st11_m_device = {
-    .name          = "ST-11M MFM Fixed Disk Adapter",
+    .name          = "ST-11M (MFM)",
     .internal_name = "st506_xt_st11_m",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_ST11M,
@@ -2325,7 +2352,7 @@ const device_t st506_xt_st11_m_device = {
 };
 
 const device_t st506_xt_st11_r_device = {
-    .name          = "ST-11R RLL Fixed Disk Adapter",
+    .name          = "ST-11R (RLL)",
     .internal_name = "st506_xt_st11_r",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_ST11R,
@@ -2339,7 +2366,7 @@ const device_t st506_xt_st11_r_device = {
 };
 
 const device_t st506_xt_wd1002a_wx1_device = {
-    .name          = "WD1002A-WX1 MFM Fixed Disk Adapter",
+    .name          = "WD1002A-WX1 (MFM)",
     .internal_name = "st506_xt_wd1002a_wx1",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WD1002A_WX1,
@@ -2353,7 +2380,7 @@ const device_t st506_xt_wd1002a_wx1_device = {
 };
 
 const device_t st506_xt_wd1002a_wx1_nobios_device = {
-    .name          = "WD1002A-WX1 MFM Fixed Disk Adapter (No BIOS)",
+    .name          = "WD1002A-WX1 (MFM) (No BIOS)",
     .internal_name = "st506_xt_wd1002a_wx1",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WD1002A_WX1_NOBIOS,
@@ -2367,7 +2394,7 @@ const device_t st506_xt_wd1002a_wx1_nobios_device = {
 };
 
 const device_t st506_xt_wd1002a_27x_device = {
-    .name          = "WD1002A-27X RLL Fixed Disk Adapter",
+    .name          = "WD1002A-27X (RLL)",
     .internal_name = "st506_xt_wd1002a_27x",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WD1002A_27X,
@@ -2381,7 +2408,7 @@ const device_t st506_xt_wd1002a_27x_device = {
 };
 
 const device_t st506_xt_wd1004a_wx1_device = {
-    .name          = "WD1004A-WX1 MFM Fixed Disk Adapter",
+    .name          = "WD1004A-WX1 (MFM)",
     .internal_name = "st506_xt_wd1004a_wx1",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WD1004A_WX1,
@@ -2395,7 +2422,7 @@ const device_t st506_xt_wd1004a_wx1_device = {
 };
 
 const device_t st506_xt_wd1004_27x_device = {
-    .name          = "WD1004-27X RLL Fixed Disk Adapter",
+    .name          = "WD1004-27X (RLL)",
     .internal_name = "st506_xt_wd1004_27x",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WD1004_27X,
@@ -2409,7 +2436,7 @@ const device_t st506_xt_wd1004_27x_device = {
 };
 
 const device_t st506_xt_wd1004a_27x_device = {
-    .name          = "WD1004a-27X RLL Fixed Disk Adapter",
+    .name          = "WD1004a-27X (RLL)",
     .internal_name = "st506_xt_wd1004a_27x",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_WD1004A_27X,
@@ -2423,7 +2450,7 @@ const device_t st506_xt_wd1004a_27x_device = {
 };
 
 const device_t st506_xt_victor_v86p_device = {
-    .name          = "Victor V86P RLL Fixed Disk Adapter",
+    .name          = "Victor V86P (RLL)",
     .internal_name = "st506_xt_victor_v86p",
     .flags         = DEVICE_ISA,
     .local         = (HDD_BUS_MFM << 8) | ST506_XT_TYPE_VICTOR_V86P,

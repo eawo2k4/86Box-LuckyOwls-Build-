@@ -203,6 +203,10 @@ oti_out(uint16_t addr, uint8_t val, void *priv)
                     }
                     break;
 
+                case 0x0e:
+                    svga_recalctimings(svga);
+                    break;
+
                 case 0x11:
                     svga->read_bank  = (val & 0xf) * 65536;
                     svga->write_bank = (val >> 4) * 65536;
@@ -377,7 +381,7 @@ oti_pos_in(UNUSED(uint16_t addr), void *priv)
 }
 
 static float
-oti_getclock(int clock)
+oti068_getclock(int clock)
 {
     float ret = 0.0;
 
@@ -389,14 +393,23 @@ oti_getclock(int clock)
         case 1:
             ret = 28322000.0;
             break;
+        case 2:
+            ret = 65000000.0;
+            break;
+        case 3:
+            ret = 44900000.0;
+            break;
         case 4:
-            ret = 14318000.0;
+            ret = 28322000.0;
             break;
         case 5:
-            ret = 16257000.0;
+            ret = 36000000.0;
+            break;
+        case 6:
+            ret = 40000000.0;
             break;
         case 7:
-            ret = 35500000.0;
+            ret = 36000000.0;
             break;
     }
 
@@ -409,7 +422,7 @@ oti_recalctimings(svga_t *svga)
     const oti_t *oti     = (oti_t *) svga->priv;
     int          clk_sel = ((svga->miscout >> 2) & 3) | ((oti->regs[0x0d] & 0x20) >> 3);
 
-    svga->clock = (cpuclock * (double) (1ULL << 32)) / oti_getclock(clk_sel);
+    svga->clock = (cpuclock * (double) (1ULL << 32)) / oti068_getclock(clk_sel);
 
     if (oti->chip_id > 0) {
         if (oti->regs[0x14] & 0x08)
@@ -424,7 +437,17 @@ oti_recalctimings(svga_t *svga)
         if (oti->regs[0x14] & 0x04)
             svga->vsyncstart += 0x400;
 
-        svga->interlace = oti->regs[0x14] & 0x80;
+        svga->interlace = !!(oti->regs[0x14] & 0x80);
+
+        if (!svga->scrblank && svga->attr_palette_enable) {
+            if (!(svga->gdcreg[6] & 1) && !(svga->attrregs[0x10] & 1))
+                svga->interlace = 0;
+        }
+
+        if (oti->regs[0x0e] & 0x80) {
+            svga->write_bank = 0;
+            svga->read_bank = 0;
+        }
     }
 
     if ((oti->regs[0x0d] & 0x0c) && !(oti->regs[0x0d] & 0x10))
@@ -519,10 +542,10 @@ oti_init(const device_t *info)
 
     if (oti->chip_id == OTI_077_ACER100T) {
         /*
-           josephillips: Required to show all BIOS 
+           josephillips: Required to show all BIOS
            information on Acer 100T only
         */
-        video_inform(0x1, &timing_oti);   
+        video_inform(0x1, &timing_oti);
     } else
         video_inform(VIDEO_FLAG_TYPE_SPECIAL, &timing_oti);
 
@@ -538,7 +561,7 @@ oti_init(const device_t *info)
 
     oti->svga.miscout       = 1;
     oti->svga.packed_chain4 = 1;
-    
+
     return oti;
 }
 
@@ -702,7 +725,7 @@ const device_t oti037c_device = {
 };
 
 const device_t oti037_pbl300sx_device = {
-    .name          = "Oak OTI-037 (Packard Bell Legend 300SX)",
+    .name          = "Oak OTI-037 On-Board (Packard Bell PB300/PB320)",
     .internal_name = "oti037_pbl300sx",
     .flags         = DEVICE_ISA,
     .local         = 1,
@@ -730,7 +753,7 @@ const device_t oti067_device = {
 };
 
 const device_t oti067_ama932j_device = {
-    .name          = "Oak OTI-067 (AMA-932J)",
+    .name          = "Oak OTI-067 On-Board (Arche AMA-932J)",
     .internal_name = "oti067_ama932j",
     .flags         = DEVICE_ISA,
     .local         = 3,
@@ -744,7 +767,7 @@ const device_t oti067_ama932j_device = {
 };
 
 const device_t oti067_m300_device = {
-    .name          = "Oak OTI-067 (Olivetti M300-08/15)",
+    .name          = "Oak OTI-067 On-Board (Olivetti M300-08/15)",
     .internal_name = "oti067_m300",
     .flags         = DEVICE_ISA,
     .local         = 4,
@@ -772,7 +795,7 @@ const device_t oti077_device = {
 };
 
 const device_t oti077_acer100t_device = {
-    .name          = "Oak OTI-077 (Acer 100T)",
+    .name          = "Oak OTI-077 On-Board (Acer 100T)",
     .internal_name = "oti077_acer100t",
     .flags         = DEVICE_ISA,
     .local         = 6,
@@ -785,7 +808,7 @@ const device_t oti077_acer100t_device = {
     .config        = oti077_acer100t_config
 };
 const device_t oti077_pcs44c_device = {
-    .name          = "Oak OTI-077 (Olivetti PCS 44/C)",
+    .name          = "Oak OTI-077 On-Board (Olivetti PCS 44/C)",
     .internal_name = "oti077_pcs44c",
     .flags         = DEVICE_ISA,
     .local         = 7,

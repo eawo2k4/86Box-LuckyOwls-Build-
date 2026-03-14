@@ -5129,7 +5129,7 @@ mach64_writel_be(uint32_t addr, uint32_t val, void *priv)
 }
 
 uint8_t
-mach64_pci_read(UNUSED(int func), int addr, void *priv)
+mach64_pci_read(UNUSED(int func), int addr, UNUSED(int len), void *priv)
 {
     const mach64_t *mach64 = (mach64_t *) priv;
 
@@ -5214,7 +5214,7 @@ mach64_pci_read(UNUSED(int func), int addr, void *priv)
 }
 
 void
-mach64_pci_write(UNUSED(int func), int addr, uint8_t val, void *priv)
+mach64_pci_write(UNUSED(int func), int addr, UNUSED(int len), uint8_t val, void *priv)
 {
     mach64_t *mach64 = (mach64_t *) priv;
 
@@ -5809,7 +5809,7 @@ const device_t mach64vt2_device = {
 };
 
 const device_t mach64vt3_onboard_device = {
-    .name          = "ATI Mach64VT3 (Onboard)",
+    .name          = "ATI Mach64VT3 (On-Board)",
     .internal_name = "mach64vt3_onboard",
     .flags         = DEVICE_PCI,
     .local         = MACH64_VT3 | (1 << 19),

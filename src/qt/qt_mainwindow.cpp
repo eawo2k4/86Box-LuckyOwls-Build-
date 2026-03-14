@@ -33,6 +33,8 @@
 
 #include "qt_cgasettingsdialog.hpp"
 
+#include "qt_defs.hpp"
+
 extern "C" {
 #include <86box/86box.h>
 #include <86box/config.h>
@@ -936,7 +938,7 @@ MainWindow::closeEvent(QCloseEvent *event)
         questionbox.setCheckBox(chkbox);
         chkbox->setChecked(!confirm_exit);
 
-        QObject::connect(chkbox, &QCheckBox::stateChanged, [](int state) {
+        QObject::connect(chkbox, &QCheckBox::CHECK_STATE_CHANGED, [](int state) {
             confirm_exit = (state == Qt::CheckState::Unchecked);
         });
         questionbox.exec();
@@ -1018,6 +1020,18 @@ MainWindow::updateShortcuts()
     seq   = QKeySequence::fromString(acc_keys[accID].seq);
     ui->actionTake_screenshot->setShortcut(seq);
 
+    accID = FindAccelerator("raw_screenshot");
+    seq   = QKeySequence::fromString(acc_keys[accID].seq);
+    ui->actionTake_raw_screenshot->setShortcut(seq);
+
+    accID = FindAccelerator("copy_screenshot");
+    seq   = QKeySequence::fromString(acc_keys[accID].seq);
+    ui->actionCopy_screenshot->setShortcut(seq);
+
+    accID = FindAccelerator("copy_raw_screenshot");
+    seq   = QKeySequence::fromString(acc_keys[accID].seq);
+    ui->actionCopy_raw_screenshot->setShortcut(seq);
+
     accID = FindAccelerator("send_ctrl_alt_del");
     seq   = QKeySequence::fromString(acc_keys[accID].seq);
     ui->actionCtrl_Alt_Del->setShortcut(seq);
@@ -1029,6 +1043,10 @@ MainWindow::updateShortcuts()
     accID = FindAccelerator("hard_reset");
     seq   = QKeySequence::fromString(acc_keys[accID].seq);
     ui->actionHard_Reset->setShortcut(seq);
+
+    accID = FindAccelerator("fast_forward");
+    seq   = QKeySequence::fromString(acc_keys[accID].seq);
+    ui->actionFast_forward->setShortcut(seq);
 
     accID = FindAccelerator("fullscreen");
     seq   = QKeySequence::fromString(acc_keys[accID].seq);
@@ -1200,16 +1218,16 @@ MainWindow::on_actionHard_Reset_triggered()
     if (confirm_reset) {
         QMessageBox questionbox(QMessageBox::Icon::Question, "86Box", tr("Are you sure you want to hard reset the emulated machine?"), QMessageBox::NoButton, this);
         questionbox.addButton(tr("Reset"), QMessageBox::AcceptRole);
-        questionbox.addButton(tr("Don't reset"), QMessageBox::RejectRole);
-        const auto chkbox = new QCheckBox(tr("Don't show this message again"));
+        auto no_reset_button = questionbox.addButton(tr("Don't reset"), QMessageBox::RejectRole);
+        const auto chkbox    = new QCheckBox(tr("Don't show this message again"));
         questionbox.setCheckBox(chkbox);
         chkbox->setChecked(!confirm_reset);
 
-        QObject::connect(chkbox, &QCheckBox::stateChanged, [](int state) {
+        QObject::connect(chkbox, &QCheckBox::CHECK_STATE_CHANGED, [](int state) {
             confirm_reset = (state == Qt::CheckState::Unchecked);
         });
         questionbox.exec();
-        if (questionbox.result() == QDialog::Accepted) {
+        if (questionbox.clickedButton() == no_reset_button) {
             confirm_reset = true;
             return;
         }
@@ -1550,6 +1568,18 @@ MainWindow::eventFilter(QObject *receiver, QEvent *event)
                 || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("screenshot")) {
                 ui->actionTake_screenshot->trigger();
             }
+            if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("raw_screenshot")
+                || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("raw_screenshot")) {
+                ui->actionTake_raw_screenshot->trigger();
+            }
+            if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("copy_screenshot")
+                || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("copy_screenshot")) {
+                ui->actionCopy_screenshot->trigger();
+            }
+            if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("copy_raw_screenshot")
+                || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("copy_raw_screenshot")) {
+                ui->actionCopy_raw_screenshot->trigger();
+            }
             if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("fullscreen")
                 || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("fullscreen")) {
                 ui->actionFullscreen->trigger();
@@ -1557,6 +1587,10 @@ MainWindow::eventFilter(QObject *receiver, QEvent *event)
             if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("hard_reset")
                 || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("hard_reset")) {
                 ui->actionHard_Reset->trigger();
+            }
+            if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("fast_forward")
+                || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("fast_forward")) {
+                ui->actionFast_forward->trigger();
             }
             if ((QKeySequence) (ke->key() | (ke->modifiers() & ~Qt::KeypadModifier)) == FindAcceleratorSeq("send_ctrl_alt_del")
                 || (QKeySequence) (ke->key() | ke->modifiers()) == FindAcceleratorSeq("send_ctrl_alt_del")) {
@@ -2397,7 +2431,7 @@ MainWindow::changeEvent(QEvent *event)
 #ifdef Q_OS_WINDOWS
     if (event->type() == QEvent::LanguageChange) {
         auto size = this->centralWidget()->size();
-        QApplication::setFont(QFont(ProgSettings::getFontName(lang_id), 9));
+        QApplication::setFont(ProgSettings::getUIFont());
         QApplication::processEvents();
         main_window->centralWidget()->setFixedSize(size);
         QApplication::processEvents();

@@ -1128,7 +1128,7 @@ banshee_status(banshee_t *banshee)
     int           fifo_entries = FIFO_ENTRIES;
     int           swap_count   = voodoo->swap_count;
     int           written      = voodoo->cmd_written + voodoo->cmd_written_fifo;
-    int           busy         = (written - voodoo->cmd_read) || (voodoo->cmdfifo_depth_rd != voodoo->cmdfifo_depth_wr) || (voodoo->cmdfifo_depth_rd_2 != voodoo->cmdfifo_depth_wr_2) || voodoo->render_voodoo_busy[0] || voodoo->render_voodoo_busy[1] || voodoo->render_voodoo_busy[2] || voodoo->render_voodoo_busy[3] || voodoo->voodoo_busy;
+    int           busy         = (written - voodoo->cmd_read) || (voodoo->cmdfifo_depth_rd != voodoo->cmdfifo_depth_wr) || (voodoo->cmdfifo_depth_rd_2 != voodoo->cmdfifo_depth_wr_2) || RENDER_VOODOO_BUSY(voodoo, 0) || RENDER_VOODOO_BUSY(voodoo, 1) || RENDER_VOODOO_BUSY(voodoo, 2) || RENDER_VOODOO_BUSY(voodoo, 3) || voodoo->voodoo_busy;
     uint32_t      ret          = 0;
 
     if (fifo_entries < 0x20)
@@ -3066,7 +3066,7 @@ banshee_vsync_callback(svga_t *svga)
 }
 
 static uint8_t
-banshee_pci_read(int func, int addr, void *priv)
+banshee_pci_read(int func, int addr, UNUSED(int len), void *priv)
 {
     const banshee_t *banshee = (banshee_t *) priv;
 #if 0
@@ -3276,7 +3276,7 @@ banshee_pci_read(int func, int addr, void *priv)
 }
 
 static void
-banshee_pci_write(int func, int addr, uint8_t val, void *priv)
+banshee_pci_write(int func, int addr, UNUSED(int len), uint8_t val, void *priv)
 {
     banshee_t *banshee = (banshee_t *) priv;
 #if 0

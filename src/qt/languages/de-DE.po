@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-29 00:34+0000\n"
-"Last-Translator: OBattler <oubattler@gmail.com>\n"
+"PO-Revision-Date: 2026-03-12 16:30+0000\n"
+"Last-Translator: toggo9 <johann2000@outlook.at>\n"
 "Language-Team: German <https://weblate.86box.net/projects/86box/86box/de/>\n"
 "Language: de-DE\n"
 "MIME-Version: 1.0\n"
@@ -55,10 +55,10 @@ msgid "&Resizeable window"
 msgstr "G&rößenverstellbares Fenster"
 
 msgid "R&emember size && position"
-msgstr "Größe && &Position merken"
+msgstr "Größe und &Position merken"
 
 msgid "Remember size && position"
-msgstr "Größe && Position merken"
+msgstr "Größe und Position merken"
 
 msgid "Re&nderer"
 msgstr "Re&nderer"
@@ -210,14 +210,26 @@ msgstr "&Statusleistenicons aktualisieren"
 msgid "Take s&creenshot"
 msgstr "S&creenshot aufnehmen"
 
+msgid "Take screenshot"
+msgstr "Screenshot aufnehmen"
+
 msgid "Take &raw screenshot"
 msgstr "&Roh-Screenshot aufnehmen"
+
+msgid "Take raw screenshot"
+msgstr "Roh-Screenshot aufnehmen"
 
 msgid "C&opy screenshot"
 msgstr "Screenshot k&opieren"
 
+msgid "Copy screenshot"
+msgstr "Screenshot kopieren"
+
 msgid "Copy r&aw screenshot"
 msgstr "R&oh-Screenshot kopieren"
+
+msgid "Copy raw screenshot"
+msgstr "Roh-Screenshot kopieren"
 
 msgid "S&ound"
 msgstr "&Ton"
@@ -339,6 +351,15 @@ msgstr "Höhe:"
 msgid "Lock to this size"
 msgstr "Feste Größe"
 
+msgid "General"
+msgstr "Allgemeines"
+
+msgid "Processor"
+msgstr "Prozessor"
+
+msgid "Performance"
+msgstr "Leistung"
+
 msgid "Machine type:"
 msgstr "Systemtyp:"
 
@@ -360,8 +381,14 @@ msgstr "Geschwindigkeit:"
 msgid "Frequency:"
 msgstr "Frequenz:"
 
+msgid "%1 MHz"
+msgstr "%1 MHz"
+
 msgid "FPU:"
 msgstr "FPU-Einheit:"
+
+msgid "Internal"
+msgstr "Integriert"
 
 msgid "Wait states:"
 msgstr "Wartezustände:"
@@ -384,6 +411,9 @@ msgstr "Eingeschaltet (Lokale Uhrzeit)"
 msgid "Enabled (UTC)"
 msgstr "Eingeschaltet (UTC)"
 
+msgid "Use the 486 interpreter for 286 and 386 processors"
+msgstr "Verwende den 486-Interpreter für 286- und 386-Prozessoren"
+
 msgid "Dynamic Recompiler"
 msgstr "Dynamischer Recompiler"
 
@@ -401,6 +431,9 @@ msgstr "Grafikkarte:"
 
 msgid "Video #2:"
 msgstr "Grafikkarte 2:"
+
+msgid "Accelerators"
+msgstr "Beschleuniger"
 
 msgid "Voodoo 1 or 2 Graphics"
 msgstr "Voodoo 1 oder 2 Grafik"
@@ -471,8 +504,8 @@ msgstr "Eigenständiges-MPU-401-Gerät"
 msgid "Use FLOAT32 sound"
 msgstr "FLOAT32-Wiedergabe benutzen"
 
-msgid "FM synth driver"
-msgstr "FM-Synth-Treiber"
+msgid "FM synth driver:"
+msgstr "FM-Synth-Treiber:"
 
 msgid "Nuked (more accurate)"
 msgstr "Nuked (genauer)"
@@ -537,11 +570,11 @@ msgstr "Disketten-Controller:"
 msgid "CD-ROM controller:"
 msgstr "CD-ROM-Controller:"
 
-msgid "[ISA16] Tertiary IDE Controller"
-msgstr "[ISA16] Tertiärer IDE-Controller"
+msgid "Tertiary IDE Controller"
+msgstr "Tertiärer IDE-Controller"
 
-msgid "[ISA16] Quaternary IDE Controller"
-msgstr "[ISA16] Quartärer IDE-Controller"
+msgid "Quaternary IDE Controller"
+msgstr "Quartärer IDE-Controller"
 
 msgid "Hard disk controllers"
 msgstr "Festplattencontroller"
@@ -609,8 +642,8 @@ msgstr "Abbildformat:"
 msgid "Block Size:"
 msgstr "Blockgröße:"
 
-msgid "Floppy drives:"
-msgstr "Diskettenlaufwerke:"
+msgid "Floppy drives"
+msgstr "Diskettenlaufwerke"
 
 msgid "Turbo timings"
 msgstr "Turbo-Timings"
@@ -618,23 +651,26 @@ msgstr "Turbo-Timings"
 msgid "Check BPB"
 msgstr "BPB überprüfen"
 
-msgid "CD-ROM drives:"
-msgstr "CD-ROM-Laufwerke:"
+msgid "CD-ROM drives"
+msgstr "CD-ROM-Laufwerke"
 
-msgid "MO drives:"
-msgstr "MO-Laufwerke:"
+msgid "MO drives"
+msgstr "MO-Laufwerke"
 
 msgid "MO:"
 msgstr "MO:"
 
+msgid "Removable disk drives"
+msgstr "Wechseldatenträger"
+
 msgid "Removable disks:"
 msgstr "Wechseldatenträger:"
 
-msgid "Removable disk drives:"
-msgstr "Wechseldatenträger:"
+msgid "Tape drives"
+msgstr "Bandlaufwerke"
 
-msgid "ZIP 250"
-msgstr "ZIP 250"
+msgid "Tape drives:"
+msgstr "Bandlaufwerke:"
 
 msgid "ISA RTC:"
 msgstr "ISA-Echtzeituhr:"
@@ -693,6 +729,15 @@ msgstr "&Wechseldatenträger %1 (%2): %3"
 msgid "Removable disk images"
 msgstr "Wechseldatenträgerabbilder"
 
+msgid "Tape %1 (%2): %3"
+msgstr "Band %1 (%2): %3"
+
+msgid "&Tape %1 (%2): %3"
+msgstr "&Band %1 (%2): %3"
+
+msgid "Tape images"
+msgstr "Bandabbilder"
+
 msgid "Image %1"
 msgstr "Abbild %1"
 
@@ -730,10 +775,10 @@ msgid "Video card \"%hs\" is not available due to missing ROMs in the roms/video
 msgstr "Die Videokarte \"%hs\" ist aufgrund von fehlenden ROMs im Verzeichnis roms/video nicht verfügbar. Es wird auf eine verfügbare Videokarte gewechselt."
 
 msgid "Video card #2 \"%hs\" is not available due to missing ROMs in the roms/video directory. Disabling the second video card."
-msgstr "Das Gerät \"%hs\" ist aufgrund von fehlenden ROMs nicht verfügbar. Es wird ignoriert."
+msgstr "Die Videokarte 2 \"%hs\" ist aufgrund von fehlenden ROMs im Verzeichnis roms/video nicht verfügbar. Es wird deaktiviert."
 
 msgid "Device \"%hs\" is not available due to missing ROMs. Ignoring the device."
-msgstr "Die Videokarte 2 \"%hs\" ist aufgrund von fehlenden ROMs im Verzeichnis roms/video nicht verfügbar. Es wird deaktiviert."
+msgstr "Das Gerät \"%hs\" ist aufgrund von fehlenden ROMs nicht verfügbar. Es wird ignoriert."
 
 msgid "Machine"
 msgstr "System"
@@ -756,8 +801,14 @@ msgstr "Anschlüsse (COM + LPT)"
 msgid "Ports"
 msgstr "Anschlüsse"
 
+msgid "Serial ports"
+msgstr "Serielle Anschlüsse"
+
 msgid "Serial ports:"
 msgstr "Serielle Anschlüsse:"
+
+msgid "Parallel ports"
+msgstr "Parallele Anschlüsse"
 
 msgid "Parallel ports:"
 msgstr "Parallele Anschlüsse:"
@@ -804,14 +855,8 @@ msgstr "Bus"
 msgid "File"
 msgstr "Datei"
 
-msgid "C"
-msgstr "C"
-
-msgid "H"
-msgstr "H"
-
-msgid "S"
-msgstr "S"
+msgid "Geometry"
+msgstr "Geometrie"
 
 msgid "KB"
 msgstr "KB"
@@ -1143,8 +1188,8 @@ msgstr "Die ausgewählte Konfigurationsdatei konnte nicht eingelesen werden: %1"
 msgid "Use regular expressions in search box"
 msgstr "Benutze reguläre Ausdrücke in der Suche"
 
-msgid "%1 machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
-msgstr "%1 Maschinen sind aktuell aktiv. Bist du sicher, dass du den VM Manager trotzdem schließen möchtest?"
+msgid "%n machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
+msgstr "%n Maschinen sind aktuell aktiv. Bist du sicher, dass du den VM Manager trotzdem schließen möchtest?"
 
 msgid "Add new system wizard"
 msgstr "Assistent für ein neues System"
@@ -1226,9 +1271,6 @@ msgstr "Gebe den neuen Anzeigenamen ein (leer lassen zum Zurücksetzen)"
 
 msgid "Change &display name…"
 msgstr "&Anzeigename ändern…"
-
-msgid "Context Menu"
-msgstr "Kontextmenü"
 
 msgid "&Open folder…"
 msgstr "&Ordner öffnen…"
@@ -1575,6 +1617,9 @@ msgstr "1.5% unterhalb der perfekten Drehzahl"
 msgid "2% below perfect RPM"
 msgstr "2% unterhalb der perfekten Drehzahl"
 
+msgid "Creating image…"
+msgstr "Bild wird erstellt…"
+
 msgid "(System Default)"
 msgstr "(Systemstandard)"
 
@@ -1851,8 +1896,8 @@ msgstr "3M MicroTouch (Seriell)"
 msgid "Default Baud rate"
 msgstr "Standard-Baudrate"
 
-msgid "[COM] Standard Hayes-compliant Modem"
-msgstr "[COM] Standard Hayes-kompatibles Modem"
+msgid "Standard Hayes-compliant Modem"
+msgstr "Standard Hayes-kompatibles Modem"
 
 msgid "Roland MT-32 Emulation"
 msgstr "Roland MT-32-Emulation"
@@ -2664,6 +2709,12 @@ msgstr "Hohe Auswirkung auf die Leistung"
 msgid "[Generic] RAM Disk (max. speed)"
 msgstr "[Generisch] RAM-Disk (maximale Geschwindigkeit)"
 
+msgid "[Generic] 1983 MFM (3600 RPM)"
+msgstr "[Generisch] 1983 MFM (3600 U/min)"
+
+msgid "[Generic] 1983 RLL (3600 RPM)"
+msgstr "[Generisch] 1983 RLL (3600 U/min)"
+
 msgid "[Generic] 1989 (3500 RPM)"
 msgstr "[Generisch] 1989 (3500 U/min)"
 
@@ -2766,8 +2817,8 @@ msgstr "Nach unten verschieben"
 msgid "Could not load file %1"
 msgstr "Datei %1 konnte nicht geladen werden"
 
-msgid "Key Bindings:"
-msgstr "Tastenbelegungen:"
+msgid "Key bindings"
+msgstr "Tastenbelegungen"
 
 msgid "Action"
 msgstr "Aktion"
@@ -2805,9 +2856,6 @@ msgstr "Vollbild umschalten"
 msgid "Toggle UI in fullscreen"
 msgstr "UI im Vollbildmodus umschalten"
 
-msgid "Screenshot"
-msgstr "Bildschirmaufnahme"
-
 msgid "Release mouse pointer"
 msgstr "Mauszeiger freigeben"
 
@@ -2832,8 +2880,8 @@ msgstr "Lokaler Schalter"
 msgid "Remote Switch"
 msgstr "Entfernter Schalter"
 
-msgid "Switch:"
-msgstr "Schalter:"
+msgid "Shared secret:"
+msgstr "Gemeinsames Geheimnis:"
 
 msgid "Hub Mode"
 msgstr "Hub-Modus"
@@ -2842,10 +2890,10 @@ msgid "Hostname:"
 msgstr "Hostname:"
 
 msgid "ISA RAM:"
-msgstr ""
+msgstr "ISA RAM:"
 
 msgid "ISA ROM:"
-msgstr ""
+msgstr "ISA ROM:"
 
 msgid "&Wipe NVRAM"
 msgstr "NVRAM leeren"
@@ -2863,10 +2911,10 @@ msgid "An error occurred trying to wipe the NVRAM contents of the virtual machin
 msgstr "Beim Leeren des NVRAMs der virtuellen Maschine ist ein Fehler aufgetreten \"%1\""
 
 msgid "%1 VM Manager"
-msgstr ""
+msgstr "%1 VM Manager"
 
 msgid "%n disk(s)"
-msgstr ""
+msgstr "%n Festplatte(n)"
 
 msgid "Unknown Status"
 msgstr "Unbekannter Status"
@@ -3010,4 +3058,13 @@ msgid "&Allow recompilation"
 msgstr "Recompilierung &zulassen"
 
 msgid "&Fast forward"
-msgstr ""
+msgstr "&Schnellvorlauf"
+
+msgid "Fast forward"
+msgstr "Schnellvorlauf"
+
+msgid "To change the system directory, stop all running machines."
+msgstr "Um das Systemverzeichnis zu ändern, stoppen Sie alle laufenden Maschinen."
+
+msgid "Raw"
+msgstr "Roh"

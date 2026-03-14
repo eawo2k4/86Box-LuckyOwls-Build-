@@ -50,7 +50,7 @@ machine_at_m729_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE,     0, 0, 0, 0);
@@ -83,7 +83,7 @@ machine_at_acerv62x_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -220,7 +220,7 @@ machine_at_lx6_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000e0000, 131072, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -251,7 +251,7 @@ machine_at_optiplexgxa_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x07, PCI_CARD_SOUTHBRIDGE, 0, 0, 0, 4);
@@ -307,6 +307,161 @@ machine_at_spitfire_init(const machine_t *model)
     return ret;
 }
 
+static const device_config_t ms6117_config[] = {
+    // clang-format off
+    {
+        .name           = "bios",
+        .description    = "BIOS Version",
+        .type           = CONFIG_BIOS,
+        .default_string = "ms6117a",
+        .default_int    = 0,
+        .file_filter    = NULL,
+        .spinner        = { 0 },
+        .selection      = { { 0 } },
+        .bios           = {
+            {
+                .name          = "AMIBIOS 6 (071595) - Revision 2.0",
+                .internal_name = "ms6117a",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 131072,
+                .files         = { "roms/machines/ms6117/A617MS20.ROM", "" }
+            },
+            {
+                .name          = "AMIBIOS 6 (071595) - Revision 1.10j (Japanese)",
+                .internal_name = "ms6117aj",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 131072,
+                .files         = { "roms/machines/ms6117/A617J110.ROM", "" }
+            },
+            {
+                .name          = "AMIBIOS 6 (071595) - Revision 3.11sc (Simplified Chinese)",
+                .internal_name = "ms6117asc",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 131072,
+                .files         = { "roms/machines/ms6117/A617C311.ROM", "" }
+            },
+            {
+                .name          = "AMIBIOS 6 (071595) - Revision 4.10tc (Traditional Chinese)",
+                .internal_name = "ms6117atc",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 131072,
+                .files         = { "roms/machines/ms6117/A617C410.ROM", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v4.51PG - Revision 3.2",
+                .internal_name = "ms6117w",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/ms6117/W617MS32.BIN", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v4.51PG - Revision 3.2 [Patched for larger drives]",
+                .internal_name = "ms6117wp",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/ms6117/611732x_patched.BIN", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v4.51PG - Revision 1.4 (Fujitsu-Siemens OEM)",
+                .internal_name = "ms6117wfs",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 131072,
+                .files         = { "roms/machines/ms6117/AWARD 1.04 .BIN", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v4.51PG - Revision 1.02 (LG IBM Multinet x7E)",
+                .internal_name = "ms6117wlg",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/ms6117/BIOS.BIN", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v4.51PG - Revision 1.5 (Viglen Vig67M)",
+                .internal_name = "ms6117wvi",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 131072,
+                .files         = { "roms/machines/ms6117/w617v115.BIN", "" }
+            },
+            { .files_no = 0 }
+        }
+    },
+    { .name = "", .description = "", .type = CONFIG_END }
+    // clang-format on
+};
+
+const device_t ms6117_device = {
+    .name          = "MSI MS-6117",
+    .internal_name = "ms6117",
+    .flags         = 0,
+    .local         = 0,
+    .init          = NULL,
+    .close         = NULL,
+    .reset         = NULL,
+    .available     = NULL,
+    .speed_changed = NULL,
+    .force_redraw  = NULL,
+    .config        = ms6117_config
+};
+
+int
+machine_at_ms6117_init(const machine_t *model)
+{
+    int         ret = 0;
+    const char *fn;
+
+    /* No ROMs available */
+    if (!device_available(model->device))
+        return ret;
+
+    device_context(model->device);
+    fn  = device_get_bios_file(machine_get_device(machine), device_get_config_bios("bios"), 0);
+    int size = device_get_bios_file_size(machine_get_device(machine), device_get_config_bios("bios"));
+    ret = bios_load_linear(fn, 0x00100000 - size, size, 0);
+    device_context_restore();
+
+    if (bios_only || !ret)
+        return ret;
+
+    machine_at_common_init(model);
+
+    pci_init(PCI_CONFIG_TYPE_1);
+    pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
+    pci_register_slot(0x0E, PCI_CARD_NORMAL,      1, 2, 3, 4);
+    pci_register_slot(0x0F, PCI_CARD_NORMAL,      2, 3, 4, 1);
+    pci_register_slot(0x10, PCI_CARD_NORMAL,      3, 4, 1, 2);
+    pci_register_slot(0x11, PCI_CARD_NORMAL,      4, 1, 2, 3);
+    pci_register_slot(0x12, PCI_CARD_NORMAL,      1, 2, 3, 4);
+    pci_register_slot(0x07, PCI_CARD_SOUTHBRIDGE, 1, 2, 3, 4);
+    pci_register_slot(0x01, PCI_CARD_AGPBRIDGE,   1, 2, 3, 4);
+
+    device_add(&i440lx_device);
+    device_add(&piix4e_device);
+    device_add_params(&w83977_device, (void *) (W83977TF | W83977_AMI | W83977_NO_NVR));
+    device_add((size > 131072) ? &winbond_flash_w29c020_device /* assumed */ : &winbond_flash_w29c011a_device);
+
+    spd_register(SPD_TYPE_SDRAM, 0xF, 256);
+
+    return ret;
+}
+
 int
 machine_at_ma30d_init(const machine_t *model)
 {
@@ -318,7 +473,7 @@ machine_at_ma30d_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -355,7 +510,7 @@ machine_at_brio83xx_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     // Actual settings!
@@ -383,6 +538,94 @@ machine_at_brio83xx_init(const machine_t *model)
     return ret;
 }
 
+static const device_config_t como_config[] = {
+    // clang-format off
+    {
+        .name           = "bios",
+        .description    = "BIOS Version",
+        .type           = CONFIG_BIOS,
+        .default_string = "como",
+        .default_int    = 0,
+        .file_filter    = NULL,
+        .spinner        = { 0 },
+        .selection      = { { 0 } },
+        .bios           = {
+            {
+                .name          = "AMIBIOS 6 (071595) - Revision 1.08 (Olivetti OEM)",
+                .internal_name = "como_olivetti",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/como/COMO_Olivetti_OEM.ROM", "" }
+            },
+            {
+                .name          = "AMIBIOS 6 (071595) - Revision 1.12 (eMachines OEM)",
+                .internal_name = "como",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/como/COMO.ROM", "" }
+            },
+            { .files_no = 0 }
+        }
+    },
+    { .name = "", .description = "", .type = CONFIG_END }
+    // clang-format on
+};
+
+const device_t como_device = {
+    .name          = "TriGem Como",
+    .internal_name = "como_device",
+    .flags         = 0,
+    .local         = 0,
+    .init          = NULL,
+    .close         = NULL,
+    .reset         = NULL,
+    .available     = NULL,
+    .speed_changed = NULL,
+    .force_redraw  = NULL,
+    .config        = como_config
+};
+
+int
+machine_at_como_init(const machine_t *model)
+{
+    int         ret = 0;
+    const char *fn;
+
+    /* No ROMs available */
+    if (!device_available(model->device))
+        return ret;
+
+    device_context(model->device);
+    fn  = device_get_bios_file(machine_get_device(machine), device_get_config_bios("bios"), 0);
+    ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
+    device_context_restore();
+
+    machine_at_common_init(model);
+
+    pci_init(PCI_CONFIG_TYPE_1);
+    pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
+    pci_register_slot(0x01, PCI_CARD_AGPBRIDGE,   1, 2, 3, 4);
+    pci_register_slot(0x07, PCI_CARD_SOUTHBRIDGE, 0, 0, 0, 4);
+    pci_register_slot(0x0B, PCI_CARD_NORMAL,      3, 4, 1, 2);
+    pci_register_slot(0x12, PCI_CARD_NORMAL,      2, 3, 4, 1);
+    pci_register_slot(0x13, PCI_CARD_NORMAL,      1, 2, 3, 4);
+
+    device_add(&i440ex_device);
+    device_add(&piix4e_device);
+    device_add_params(&fdc37m60x_device, (void*)(FDC37XXX2 | FDC37C93X_NO_NVR | FDC37XXXX_370));
+    device_add(&intel_flash_bxt_device);
+    device_add(&lm78_device);
+
+    if (sound_card_current[0] == SOUND_INTERNAL)
+        device_add(&cs4235_onboard_device);
+
+    return ret;
+}
+
 int
 machine_at_p6i440e2_init(const machine_t *model)
 {
@@ -394,7 +637,7 @@ machine_at_p6i440e2_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -427,7 +670,7 @@ machine_at_bf6_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -543,7 +786,7 @@ machine_at_bx6_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000e0000, 131072, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -574,7 +817,7 @@ machine_at_p2bls_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -613,7 +856,7 @@ machine_at_p3bf_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -713,7 +956,7 @@ machine_at_ax6bc_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -757,7 +1000,16 @@ static const device_config_t ga686_config[] = {
                 .files         = { "roms/machines/686bx/31nologo.bin", "" }
             },
             {
-                .name          = "Award Modular BIOS v4.51PG - Revision F2a",
+                .name          = "Award Modular BIOS v4.51PG - Revision F1",
+                .internal_name = "686bx_f1",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/686bx/6BX.F1", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v4.51PG - Revision F2a (Beta)",
                 .internal_name = "686bx",
                 .bios_type     = BIOS_NORMAL,
                 .files_no      = 1,
@@ -801,7 +1053,7 @@ machine_at_ga686_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -876,7 +1128,7 @@ static const device_config_t ms6119_config[] = {
                 .files         = { "roms/machines/ms6119/vig69m.212", "" }
             },
             {
-                .name          = "Award Modular BIOS v4.51PG - Revision 3.30b1 (LG IBM Multinet i x7G)",
+                .name          = "Award Modular BIOS v4.51PG - Revision 3.30b1 (LG IBM Multinet x7G)",
                 .internal_name = "lgibmx7g",
                 .bios_type     = BIOS_NORMAL,
                 .files_no      = 1,
@@ -920,7 +1172,7 @@ machine_at_ms6119_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1015,7 +1267,7 @@ machine_at_ms6147_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1105,7 +1357,7 @@ machine_at_p6sba_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1195,7 +1447,7 @@ machine_at_s1846_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1228,20 +1480,20 @@ static const device_config_t vei8_config[] = {
         .name           = "bios",
         .description    = "BIOS Version",
         .type           = CONFIG_BIOS,
-        .default_string = "vei8",
+        .default_string = "6110zu",
         .default_int    = 0,
         .file_filter    = NULL,
         .spinner        = { 0 },
         .selection      = { { 0 } },
         .bios           = {
             {
-                .name          = "Award Modular BIOS v6.00PG - Revision QHW.10.01 (HP Sherwood-B)",
-                .internal_name = "vei8",
+                .name          = "Award Modular BIOS v6.00PG - Revision 61100003 (beta)",
+                .internal_name = "6110zu0003",
                 .bios_type     = BIOS_NORMAL,
                 .files_no      = 1,
                 .local         = 0,
                 .size          = 262144,
-                .files         = { "roms/machines/vei8/QHW1001.BIN", "" }
+                .files         = { "roms/machines/vei8/61100003.BIN", "" }
             },
             {
                 .name          = "Award Modular BIOS v6.00PG - Revision R804",
@@ -1251,6 +1503,15 @@ static const device_config_t vei8_config[] = {
                 .local         = 0,
                 .size          = 262144,
                 .files         = { "roms/machines/vei8/r804.bin", "" }
+            },
+            {
+                .name          = "Award Modular BIOS v6.00PG - Revision QHW.10.01 (HP Sherwood-B)",
+                .internal_name = "vei8",
+                .bios_type     = BIOS_NORMAL,
+                .files_no      = 1,
+                .local         = 0,
+                .size          = 262144,
+                .files         = { "roms/machines/vei8/QHW1001.BIN", "" }
             },
             { .files_no = 0 }
         }
@@ -1289,7 +1550,7 @@ machine_at_vei8_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1313,7 +1574,7 @@ machine_at_vei8_init(const machine_t *model)
 static void
 machine_at_ms6168_common_init(const machine_t *model)
 {
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1384,7 +1645,7 @@ machine_at_atc6310bxii_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1416,7 +1677,7 @@ machine_at_ficka6130_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1448,7 +1709,7 @@ machine_at_p3v133_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1496,7 +1757,7 @@ static const device_config_t ms6199va_config[] = {
                 .files         = { "roms/machines/ms6199va/w6199vms.350", "" }
             },
             {
-                .name          = "Award Modular BIOS v4.51PG - Revision 2.0 (Compaq OEM)",
+                .name          = "Award Modular BIOS v4.51PG - Revision 2.0 (Compaq ProSignia/Deskpro 693A)",
                 .internal_name = "ms6199va_200",
                 .bios_type     = BIOS_NORMAL,
                 .files_no      = 1,
@@ -1505,7 +1766,7 @@ static const device_config_t ms6199va_config[] = {
                 .files         = { "roms/machines/ms6199va/W6199VC8.BIN", "" }
             },
             {
-                .name          = "Award Modular BIOS v4.51PG - Revision 2.0 (Compaq OEM) [patched for large drives]",
+                .name          = "Award Modular BIOS v4.51PG - Revision 2.0 (Compaq ProSignia/Deskpro 693A) [Patched for larger drives]",
                 .internal_name = "ms6199va_200p",
                 .bios_type     = BIOS_NORMAL,
                 .files_no      = 1,
@@ -1514,7 +1775,7 @@ static const device_config_t ms6199va_config[] = {
                 .files         = { "roms/machines/ms6199va/W6199VC8.PCD", "" }
             },
             {
-                .name          = "Award Modular BIOS v4.51PG - Revision 3.7 (Packard Bell OEM)",
+                .name          = "Award Modular BIOS v4.51PG - Revision 3.7 (Packard Bell Phoenix)",
                 .internal_name = "ms6199va_370",
                 .bios_type     = BIOS_NORMAL,
                 .files_no      = 1,
@@ -1558,7 +1819,7 @@ machine_at_ms6199va_init(const machine_t *model)
     ret = bios_load_linear(fn, 0x000c0000, 262144, 0);
     device_context_restore();
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1599,7 +1860,7 @@ machine_at_p3v4x_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1634,7 +1895,7 @@ machine_at_gt694va_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1677,7 +1938,7 @@ machine_at_p6f99_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1 | FLAG_TRC_CONTROLS_CPURST);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);
@@ -1712,7 +1973,7 @@ machine_at_m747_init(const machine_t *model)
     if (bios_only || !ret)
         return ret;
 
-    machine_at_common_init_ex(model, 2);
+    machine_at_common_init(model);
 
     pci_init(PCI_CONFIG_TYPE_1 | FLAG_TRC_CONTROLS_CPURST);
     pci_register_slot(0x00, PCI_CARD_NORTHBRIDGE, 0, 0, 0, 0);

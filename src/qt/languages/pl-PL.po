@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-30 18:56+0000\n"
+"PO-Revision-Date: 2026-03-10 16:31+0000\n"
 "Last-Translator: Lili Kurek <lili@lili.lgbt>\n"
 "Language-Team: Polish <https://weblate.86box.net/projects/86box/86box/pl/>\n"
 "Language: pl-PL\n"
@@ -211,14 +211,26 @@ msgstr "&Aktualizuj ikony na pasku statusu"
 msgid "Take s&creenshot"
 msgstr "Zrób &zrzut ekranu"
 
+msgid "Take screenshot"
+msgstr "Zrób zrzut ekranu"
+
 msgid "Take &raw screenshot"
 msgstr "Zrób &surowy zrzut ekranu"
+
+msgid "Take raw screenshot"
+msgstr "Zrób surowy zrzut ekranu"
 
 msgid "C&opy screenshot"
 msgstr "S&kopiuj zrzut ekranu"
 
+msgid "Copy screenshot"
+msgstr "Skopiuj zrzut ekranu"
+
 msgid "Copy r&aw screenshot"
 msgstr "Skopiuj s&urowy zrzut ekranu"
+
+msgid "Copy raw screenshot"
+msgstr "Skopiuj surowy zrzut ekranu"
 
 msgid "S&ound"
 msgstr "Dź&więk"
@@ -340,6 +352,15 @@ msgstr "Wysokość:"
 msgid "Lock to this size"
 msgstr "Stały rozmiar"
 
+msgid "General"
+msgstr "Ogólne"
+
+msgid "Processor"
+msgstr "Procesor"
+
+msgid "Performance"
+msgstr "Wydajność"
+
 msgid "Machine type:"
 msgstr "Rodzaj maszyny:"
 
@@ -361,8 +382,14 @@ msgstr "Szybkość:"
 msgid "Frequency:"
 msgstr "Taktowanie:"
 
+msgid "%1 MHz"
+msgstr "%1 MHz"
+
 msgid "FPU:"
 msgstr "Jednostka FPU:"
+
+msgid "Internal"
+msgstr "Zintegrowany"
 
 msgid "Wait states:"
 msgstr "Stany oczekiwania:"
@@ -385,6 +412,9 @@ msgstr "Włączona (czas lokalny)"
 msgid "Enabled (UTC)"
 msgstr "Włączona (UTC)"
 
+msgid "Use the 486 interpreter for 286 and 386 processors"
+msgstr "Użyj interpretera 486 dla procesorów 286 i 386"
+
 msgid "Dynamic Recompiler"
 msgstr "Dynamiczny rekompilator"
 
@@ -402,6 +432,9 @@ msgstr "Wideo:"
 
 msgid "Video #2:"
 msgstr "Wideo 2:"
+
+msgid "Accelerators"
+msgstr "Akceleratory"
 
 msgid "Voodoo 1 or 2 Graphics"
 msgstr "Grafika Voodoo 1 lub 2"
@@ -472,8 +505,8 @@ msgstr "Samodzielne urządzenie MPU-401"
 msgid "Use FLOAT32 sound"
 msgstr "Użyj dźwięku FLOAT32"
 
-msgid "FM synth driver"
-msgstr "Sterownik syntezy FM"
+msgid "FM synth driver:"
+msgstr "Sterownik syntezy FM:"
 
 msgid "Nuked (more accurate)"
 msgstr "Nuked (dokładniejszy)"
@@ -538,11 +571,11 @@ msgstr "Kontroler dyskietek:"
 msgid "CD-ROM controller:"
 msgstr "Kontroler CD-ROM:"
 
-msgid "[ISA16] Tertiary IDE Controller"
-msgstr "[ISA16] Trzeciorzędny kontroler IDE"
+msgid "Tertiary IDE Controller"
+msgstr "Trzeciorzędny kontroler IDE"
 
-msgid "[ISA16] Quaternary IDE Controller"
-msgstr "[ISA16] Czwartorzędny kontroler IDE"
+msgid "Quaternary IDE Controller"
+msgstr "Czwartorzędny kontroler IDE"
 
 msgid "Hard disk controllers"
 msgstr "Kontrolery dysków twardych"
@@ -610,8 +643,8 @@ msgstr "Format obrazu:"
 msgid "Block Size:"
 msgstr "Rozmiar bloku:"
 
-msgid "Floppy drives:"
-msgstr "Napędy dyskietek:"
+msgid "Floppy drives"
+msgstr "Napędy dyskietek"
 
 msgid "Turbo timings"
 msgstr "Timing Turbo"
@@ -619,23 +652,26 @@ msgstr "Timing Turbo"
 msgid "Check BPB"
 msgstr "Sprawdzaj BPB"
 
-msgid "CD-ROM drives:"
-msgstr "Napędy CD-ROM:"
+msgid "CD-ROM drives"
+msgstr "Napędy CD-ROM"
 
-msgid "MO drives:"
-msgstr "Napędy MO:"
+msgid "MO drives"
+msgstr "Napędy MO"
 
 msgid "MO:"
 msgstr "MO:"
 
+msgid "Removable disk drives"
+msgstr "Stacje dysków wymiennych"
+
 msgid "Removable disks:"
 msgstr "Dyski wymienne:"
 
-msgid "Removable disk drives:"
-msgstr "Stacje dysków wymiennych:"
+msgid "Tape drives"
+msgstr "Napędy taśmowe"
 
-msgid "ZIP 250"
-msgstr "ZIP 250"
+msgid "Tape drives:"
+msgstr "Napędy taśmowe:"
 
 msgid "ISA RTC:"
 msgstr "ISA RTC:"
@@ -693,6 +729,15 @@ msgstr "Dysk &wymienny %1 (%2): %3"
 
 msgid "Removable disk images"
 msgstr "Obrazy dysków wymiennych"
+
+msgid "Tape %1 (%2): %3"
+msgstr "Taśma %1 (%2): %3"
+
+msgid "&Tape %1 (%2): %3"
+msgstr "&Taśma %1 (%2): %3"
+
+msgid "Tape images"
+msgstr "Obrazy taśmowe"
 
 msgid "Image %1"
 msgstr "Obraz %1"
@@ -757,8 +802,14 @@ msgstr "Porty (COM & LPT)"
 msgid "Ports"
 msgstr "Porty"
 
+msgid "Serial ports"
+msgstr "Porty szeregowe"
+
 msgid "Serial ports:"
 msgstr "Porty szeregowe:"
+
+msgid "Parallel ports"
+msgstr "Porty równoległe"
 
 msgid "Parallel ports:"
 msgstr "Porty równoległe:"
@@ -805,14 +856,8 @@ msgstr "Magistrala"
 msgid "File"
 msgstr "Plik"
 
-msgid "C"
-msgstr "C"
-
-msgid "H"
-msgstr "H"
-
-msgid "S"
-msgstr "S"
+msgid "Geometry"
+msgstr "Geometria"
 
 msgid "KB"
 msgstr "KB"
@@ -1144,8 +1189,8 @@ msgstr "Nie udało się otworzyć wybranego pliku konfiguracyjnego do odczytu: %
 msgid "Use regular expressions in search box"
 msgstr "Użyj wyrażeń regularnych w polu wyszukiwania"
 
-msgid "%1 machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
-msgstr "Liczba obecnie aktywnych maszyn: %1. Czy na pewno chcesz, mimo to, wyjść z menedżera maszyn wirtualnych?"
+msgid "%n machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
+msgstr "Liczba obecnie aktywnych maszyn: %n. Czy na pewno chcesz, mimo to, wyjść z menedżera maszyn wirtualnych?"
 
 msgid "Add new system wizard"
 msgstr "Kreator dodawania nowego systemu"
@@ -1227,9 +1272,6 @@ msgstr "Podaj nową nazwę wyświetlaną (wyczyść, by zresetować)"
 
 msgid "Change &display name…"
 msgstr "Zmień wyświetlaną &nazwę…"
-
-msgid "Context Menu"
-msgstr "Menu kontekstowe"
 
 msgid "&Open folder…"
 msgstr "&Otwórz folder…"
@@ -1576,6 +1618,9 @@ msgstr "1.5% poniżej idealnych obrotów"
 msgid "2% below perfect RPM"
 msgstr "2% poniżej idealnych obrotów"
 
+msgid "Creating image…"
+msgstr "Tworzenie obrazu…"
+
 msgid "(System Default)"
 msgstr "(Domyślne ustawienie systemowe)"
 
@@ -1852,8 +1897,8 @@ msgstr "3M MicroTouch (szeregowy)"
 msgid "Default Baud rate"
 msgstr "Domyślna szybkość transmisji"
 
-msgid "[COM] Standard Hayes-compliant Modem"
-msgstr "[COM] Standardowy modem zgodny z Hayes"
+msgid "Standard Hayes-compliant Modem"
+msgstr "Standardowy modem zgodny z Hayes"
 
 msgid "Roland MT-32 Emulation"
 msgstr "Emulacja Roland MT-32"
@@ -2665,6 +2710,12 @@ msgstr "Wysoki wpływ na wydajność"
 msgid "[Generic] RAM Disk (max. speed)"
 msgstr "[generyczny] Dysk RAM (maks. prędkość)"
 
+msgid "[Generic] 1983 MFM (3600 RPM)"
+msgstr "[generyczny] 1983 MFM (3600 RPM)"
+
+msgid "[Generic] 1983 RLL (3600 RPM)"
+msgstr "[generyczny] 1983 RLL (3600 RPM)"
+
 msgid "[Generic] 1989 (3500 RPM)"
 msgstr "[generyczny] 1989 (3500 RPM)"
 
@@ -2767,8 +2818,8 @@ msgstr "Przesuń w dół"
 msgid "Could not load file %1"
 msgstr "Nie można wczytać pliku %1"
 
-msgid "Key Bindings:"
-msgstr "Przypisania klawiszy:"
+msgid "Key bindings"
+msgstr "Przypisania klawiszy"
 
 msgid "Action"
 msgstr "Akcja"
@@ -2806,9 +2857,6 @@ msgstr "Przełącz pełny ekran"
 msgid "Toggle UI in fullscreen"
 msgstr "Przełącz UI w pełnym ekranie"
 
-msgid "Screenshot"
-msgstr "Zrzut ekranu"
-
 msgid "Release mouse pointer"
 msgstr "Wypuść wskaźnik myszy"
 
@@ -2833,8 +2881,8 @@ msgstr "Switch lokalny"
 msgid "Remote Switch"
 msgstr "Switch zdalny"
 
-msgid "Switch:"
-msgstr "Switch:"
+msgid "Shared secret:"
+msgstr "Wspólny sekret:"
 
 msgid "Hub Mode"
 msgstr "Tryb hub"
@@ -3011,4 +3059,13 @@ msgid "&Allow recompilation"
 msgstr "&Zezwól na rekompilację"
 
 msgid "&Fast forward"
-msgstr ""
+msgstr "&Przewiń do przodu"
+
+msgid "Fast forward"
+msgstr "Przewiń do przodu"
+
+msgid "To change the system directory, stop all running machines."
+msgstr "Aby zmienić katalog systemowy, zatrzymaj wszystkie działające maszyny."
+
+msgid "Raw"
+msgstr "Surowy"

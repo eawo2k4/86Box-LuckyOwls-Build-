@@ -92,6 +92,7 @@
 #include <86box/cdrom_interface.h>
 #include <86box/rdisk.h>
 #include <86box/mo.h>
+#include <86box/scsi_tape.h>
 #include <86box/scsi_disk.h>
 #include <86box/cdrom_image.h>
 #include <86box/thread.h>
@@ -272,8 +273,28 @@ struct accelKey def_acc_keys[NUM_ACCELS] = {
     },
     {
         .name="screenshot",
-        .desc="Screenshot",
+        .desc="Take screenshot",
         .seq="Ctrl+F11"
+    },
+    {
+        .name="raw_screenshot",
+        .desc="Take raw screenshot",
+        .seq=""
+    },
+    {
+        .name="copy_screenshot",
+        .desc="Copy screenshot",
+        .seq=""
+    },
+    {
+        .name="copy_raw_screenshot",
+        .desc="Copy raw screenshot",
+        .seq=""
+    },
+    {
+        .name="fast_forward",
+        .desc="Fast forward",
+        .seq="Ctrl+Alt+F"
     },
     {
         .name="release_mouse",
@@ -662,12 +683,12 @@ delete_nvr_file(uint8_t flash)
 extern void  device_find_all_descs(void);
 
 static void
-pc_show_usage(char *s)
+pc_show_usage(void)
 {
     char p[8192] = { 0 };
 
     sprintf(p,
-            "\n%sUsage: 86box [options] [cfg-file]\n\n"
+            "\nUsage: 86box [options] [cfg-file]\n\n"
             "Valid options are:\n\n"
             "-? or --help\t\t\t- show this information\n"
             "-A or --assetpath path\t\t- set 'path' to be asset path\n"
@@ -716,16 +737,12 @@ pc_show_usage(char *s)
             "-Y or --donothing\t\t- do not show any UI or run the emulation\n"
 #endif
             "-Z or --lastvmpath\t\t- the last param. is VM path rather than config\n"
-            "\nA config file can be specified. If none is, the default file will be used.\n",
-            s);
+            "\nA config file can be specified. If none is, the default file will be used.\n");
 
 #ifdef _WIN32
-    ui_msgbox(MBX_ANSI | ((s == NULL) ? MBX_INFO : MBX_WARNING), p);
+    ui_msgbox(MBX_ANSI | MBX_INFO, p);
 #else
-    if (s == NULL)
-        always_log("%s", p);
-    else
-        ui_msgbox(MBX_ANSI | MBX_WARNING, p);
+    always_log("%s", p);
 #endif
 }
 
@@ -825,7 +842,7 @@ usage:
                 }
             }
 
-            pc_show_usage("");
+            pc_show_usage();
             return 0;
         } else if (!strcasecmp(argv[c], "--lastvmpath") || !strcasecmp(argv[c], "-Z")) {
             lvmp = 1;
@@ -1277,6 +1294,7 @@ usage:
         cdrom_global_init();
         rdisk_global_init();
         mo_global_init();
+        tape_global_init();
 
         /* Initialize the keyboard accelerator list with default values */
         for (int x = 0; x < NUM_ACCELS; x++) {
@@ -1478,6 +1496,7 @@ pc_init_modules(void)
         fdd_audio_init();
     }
     
+    hdd_audio_load_profiles();
     hdd_audio_init();
 
     sound_init();
@@ -1636,6 +1655,8 @@ pc_reset_hard_close(void)
 
     mo_close();
 
+    tape_close();
+
     scsi_disk_close();
 
     closeal();
@@ -1687,6 +1708,8 @@ pc_reset_hard_init(void)
     scsi_device_init();
 
     ide_hard_reset();
+
+    lpt_ports_reset();
 
     /* Initialize the actual machine and its basic modules. */
     machine_init();
@@ -1746,6 +1769,8 @@ pc_reset_hard_init(void)
     cdrom_interface_reset();
 
     mo_hard_reset();
+
+    tape_hard_reset();
 
     rdisk_hard_reset();
 
@@ -1852,11 +1877,33 @@ update_mouse_msg(void)
     swprintf(mouse_msg[2], sizeof_w(mouse_msg[2]), L"%ls v%ls - %%i%%%% - %ls - %ls/%ls",
              EMU_NAME_W, EMU_VERSION_FULL_W, wmachine, wcpufamily, wcpu);
 #else
+#ifdef __APPLE__
+    /*
+     * On macOS, BSD swprintf fails (returns -1) when the format string
+     * or a %ls argument contains non-ASCII wide characters (e.g. the
+     * native key symbols ⌘ U+2318, ⌫ U+232B) and the C locale is
+     * active.  Store just the message suffixes here; the title update
+     * path in pc_render_monitor_dispatch() builds the full string
+     * without swprintf.
+     */
+    wcsncpy(mouse_msg[0], plat_get_string(STRING_MOUSE_CAPTURE), sizeof_w(mouse_msg[0]) - 1);
+    mouse_msg[0][sizeof_w(mouse_msg[0]) - 1] = L'\0';
+
+    {
+        wchar_t *rel = (mouse_get_buttons() > 2) ? plat_get_string(STRING_MOUSE_RELEASE)
+                                                  : plat_get_string(STRING_MOUSE_RELEASE_MMB);
+        wcsncpy(mouse_msg[1], rel, sizeof_w(mouse_msg[1]) - 1);
+        mouse_msg[1][sizeof_w(mouse_msg[1]) - 1] = L'\0';
+    }
+
+    mouse_msg[2][0] = L'\0';
+#else
     swprintf(mouse_msg[0], sizeof_w(mouse_msg[0]), L"%%i%%%% - %ls",
              plat_get_string(STRING_MOUSE_CAPTURE));
     swprintf(mouse_msg[1], sizeof_w(mouse_msg[1]), L"%%i%%%% - %ls",
              (mouse_get_buttons() > 2) ? plat_get_string(STRING_MOUSE_RELEASE) : plat_get_string(STRING_MOUSE_RELEASE_MMB));
     wcsncpy(mouse_msg[2], L"%i%%", sizeof_w(mouse_msg[2]));
+#endif
 #endif
 }
 
@@ -1919,6 +1966,8 @@ pc_close(UNUSED(thread_t *ptr))
     rdisk_close();
 
     mo_close();
+
+    tape_close();
 
     scsi_disk_close();
 
@@ -1990,11 +2039,20 @@ pc_run(void)
         else
             fps = ((fps + 20) / 50) * 50;
 #endif
-        swprintf(temp, sizeof_w(temp), mouse_msg[mouse_msg_idx], fps / (force_10ms ? 1 : 10));
 #ifdef __APPLE__
+        /*
+         * mouse_msg[] stores suffixes only on macOS (see update_mouse_msg).
+         * Build the title without passing non-ASCII chars through swprintf.
+         */
+        swprintf(temp, sizeof_w(temp), L"%i%%", fps / (force_10ms ? 1 : 10));
+        if (mouse_msg[mouse_msg_idx][0]) {
+            wcsncat(temp, L" - ", sizeof_w(temp) - wcslen(temp) - 1);
+            wcsncat(temp, mouse_msg[mouse_msg_idx], sizeof_w(temp) - wcslen(temp) - 1);
+        }
         /* Needed due to modifying the UI on the non-main thread is a big no-no. */
         dispatch_async_f(dispatch_get_main_queue(), wcsdup((const wchar_t *) temp), _ui_window_title);
 #else
+        swprintf(temp, sizeof_w(temp), mouse_msg[mouse_msg_idx], fps / (force_10ms ? 1 : 10));
         ui_window_title(temp);
 #endif
         title_update = 0;

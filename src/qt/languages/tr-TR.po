@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-01-01 20:06+0000\n"
+"PO-Revision-Date: 2026-03-10 09:50+0000\n"
 "Last-Translator: Umut Çağan Uçanok <ucucanok@outlook.com.tr>\n"
 "Language-Team: Turkish <https://weblate.86box.net/projects/86box/86box/tr/>\n"
 "Language: tr-TR\n"
@@ -210,14 +210,26 @@ msgstr "Durum &çubuğu simgelerini güncelle"
 msgid "Take s&creenshot"
 msgstr "&Ekran görüntüsü al"
 
+msgid "Take screenshot"
+msgstr "Ekran görüntüsü al"
+
 msgid "Take &raw screenshot"
 msgstr "Ekran &ham görüntüsü al"
+
+msgid "Take raw screenshot"
+msgstr "Ekran ham görüntüsü al"
 
 msgid "C&opy screenshot"
 msgstr "Ekran görüntüsü k&opyala"
 
+msgid "Copy screenshot"
+msgstr "Ekran görüntüsü kopyala"
+
 msgid "Copy r&aw screenshot"
 msgstr "Ekran h&am görüntüsü kopyala"
+
+msgid "Copy raw screenshot"
+msgstr "Ekran ham görüntüsü kopyala"
 
 msgid "S&ound"
 msgstr "&Ses"
@@ -339,6 +351,15 @@ msgstr "Yükseklik:"
 msgid "Lock to this size"
 msgstr "Bu boyuta kilitle"
 
+msgid "General"
+msgstr "Genel"
+
+msgid "Processor"
+msgstr "İşlemci"
+
+msgid "Performance"
+msgstr "Performans"
+
 msgid "Machine type:"
 msgstr "Anakart türü:"
 
@@ -360,8 +381,14 @@ msgstr "Hız:"
 msgid "Frequency:"
 msgstr "Saat hızı:"
 
+msgid "%1 MHz"
+msgstr "%1 MHz"
+
 msgid "FPU:"
 msgstr "FPU:"
+
+msgid "Internal"
+msgstr "Dahili"
 
 msgid "Wait states:"
 msgstr "Bekleme süreleri:"
@@ -384,6 +411,9 @@ msgstr "Etkin (yerel zaman)"
 msgid "Enabled (UTC)"
 msgstr "Etkin (UTC)"
 
+msgid "Use the 486 interpreter for 286 and 386 processors"
+msgstr "286 ve 386 işlemcileri için 486 yorumlayıcısı kullanılsın"
+
 msgid "Dynamic Recompiler"
 msgstr "Dinamik Derleyici"
 
@@ -401,6 +431,9 @@ msgstr "Ekran kartı:"
 
 msgid "Video #2:"
 msgstr "İkincil ekran kartı:"
+
+msgid "Accelerators"
+msgstr "Hızlandırıcılar"
 
 msgid "Voodoo 1 or 2 Graphics"
 msgstr "Voodoo 1 veya 2 Grafikleri"
@@ -471,8 +504,8 @@ msgstr "Bağımsız MPU-401"
 msgid "Use FLOAT32 sound"
 msgstr "FLOAT32 sesi kullan"
 
-msgid "FM synth driver"
-msgstr "FM sentez sürücüsü"
+msgid "FM synth driver:"
+msgstr "FM sentez sürücüsü:"
 
 msgid "Nuked (more accurate)"
 msgstr "Nuked (daha hassas)"
@@ -537,11 +570,11 @@ msgstr "Disket denetleyicisi:"
 msgid "CD-ROM controller:"
 msgstr "CD-ROM denetleyicisi:"
 
-msgid "[ISA16] Tertiary IDE Controller"
-msgstr "[ISA16] Üçüncül IDE denetleyicisi"
+msgid "Tertiary IDE Controller"
+msgstr "Üçüncül IDE denetleyicisi"
 
-msgid "[ISA16] Quaternary IDE Controller"
-msgstr "[ISA16] Dördüncül IDE denetleyicisi"
+msgid "Quaternary IDE Controller"
+msgstr "Dördüncül IDE denetleyicisi"
 
 msgid "Hard disk controllers"
 msgstr "Sabit disk denetleyicileri"
@@ -609,8 +642,8 @@ msgstr "Görüntü Biçimi:"
 msgid "Block Size:"
 msgstr "Blok boyutu:"
 
-msgid "Floppy drives:"
-msgstr "Disket sürücüleri:"
+msgid "Floppy drives"
+msgstr "Disket sürücüleri"
 
 msgid "Turbo timings"
 msgstr "Turbo zamanlaması"
@@ -618,23 +651,26 @@ msgstr "Turbo zamanlaması"
 msgid "Check BPB"
 msgstr "BPB'yi denetle"
 
-msgid "CD-ROM drives:"
-msgstr "CD-ROM sürücüleri:"
+msgid "CD-ROM drives"
+msgstr "CD-ROM sürücüleri"
 
-msgid "MO drives:"
-msgstr "MO sürücüleri:"
+msgid "MO drives"
+msgstr "MO sürücüleri"
 
 msgid "MO:"
 msgstr "MO:"
 
+msgid "Removable disk drives"
+msgstr "Çıkarılabilir disk sürücüleri"
+
 msgid "Removable disks:"
 msgstr "Çıkarılabilir diskler:"
 
-msgid "Removable disk drives:"
-msgstr "Çıkarılabilir disk sürücüleri:"
+msgid "Tape drives"
+msgstr "Teyp sürücüleri"
 
-msgid "ZIP 250"
-msgstr "ZIP 250"
+msgid "Tape drives:"
+msgstr "Teyp sürücüleri:"
 
 msgid "ISA RTC:"
 msgstr "ISA RTC:"
@@ -692,6 +728,15 @@ msgstr "&Çıkarılabilir disk %1 (%2): %3"
 
 msgid "Removable disk images"
 msgstr "Çıkarılabilir disk görüntüleri"
+
+msgid "Tape %1 (%2): %3"
+msgstr "Teyp %1 (%2): %3"
+
+msgid "&Tape %1 (%2): %3"
+msgstr "&Teyp %1 (%2): %3"
+
+msgid "Tape images"
+msgstr "Teyp görüntüleri"
 
 msgid "Image %1"
 msgstr "Görüntü %1"
@@ -756,8 +801,14 @@ msgstr "Bağlantı noktaları (COM & LPT)"
 msgid "Ports"
 msgstr "Bağlantı noktaları"
 
+msgid "Serial ports"
+msgstr "Seri bağlantı noktaları"
+
 msgid "Serial ports:"
 msgstr "Seri bağlantı noktaları:"
+
+msgid "Parallel ports"
+msgstr "Paralel bağlantı noktaları"
 
 msgid "Parallel ports:"
 msgstr "Paralel bağlantı noktaları:"
@@ -804,14 +855,8 @@ msgstr "Veri yolu"
 msgid "File"
 msgstr "Dosya"
 
-msgid "C"
-msgstr "C"
-
-msgid "H"
-msgstr "H"
-
-msgid "S"
-msgstr "S"
+msgid "Geometry"
+msgstr "Disk yapısı"
 
 msgid "KB"
 msgstr "KB"
@@ -1143,8 +1188,8 @@ msgstr "Seçili yapılandırma dosyası okunmak için açılamıyor: %1"
 msgid "Use regular expressions in search box"
 msgstr "Arama kutusunda düzenli ifadeler kullan"
 
-msgid "%1 machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
-msgstr "%1 makine şu anda aktif. Yine de VM yöneticisinden çıkmak istediğinize emin misiniz?"
+msgid "%n machine(s) are currently active. Are you sure you want to exit the VM manager anyway?"
+msgstr "%n makine şu anda aktif. Yine de VM yöneticisinden çıkmak istediğinize emin misiniz?"
 
 msgid "Add new system wizard"
 msgstr "Yeni sistem ekleme sihirbazı"
@@ -1226,9 +1271,6 @@ msgstr "Yeni görünü adını girin (sıfırlamak için boş bırakın)"
 
 msgid "Change &display name…"
 msgstr "Görüntü adını &değiştirin…"
-
-msgid "Context Menu"
-msgstr "Bağlam Menüsü"
 
 msgid "&Open folder…"
 msgstr "Klas&örü aç…"
@@ -1575,6 +1617,9 @@ msgstr "Mükemmel RPM değerinin 1.5% altı"
 msgid "2% below perfect RPM"
 msgstr "Mükemmel RPM değerinin 2% altı"
 
+msgid "Creating image…"
+msgstr "Görüntü oluşturuluyor…"
+
 msgid "(System Default)"
 msgstr "(Sistem Varsayılanı)"
 
@@ -1851,8 +1896,8 @@ msgstr "3M MicroTouch (seri)"
 msgid "Default Baud rate"
 msgstr "Varsayılan Baud hızı"
 
-msgid "[COM] Standard Hayes-compliant Modem"
-msgstr "[COM] Standart Hayes Uyumlu Modem"
+msgid "Standard Hayes-compliant Modem"
+msgstr "Standart Hayes Uyumlu Modem"
 
 msgid "Roland MT-32 Emulation"
 msgstr "Roland MT-32 Emülasyonu"
@@ -2664,6 +2709,12 @@ msgstr "Ciddi performans azalışına neden olabilir"
 msgid "[Generic] RAM Disk (max. speed)"
 msgstr "[Genel] RAM Disk (maks. hız)"
 
+msgid "[Generic] 1983 MFM (3600 RPM)"
+msgstr "[Genel] 1983 MFM (3600 RPM)"
+
+msgid "[Generic] 1983 RLL (3600 RPM)"
+msgstr "[Genel] 1983 RLL (3600 RPM)"
+
 msgid "[Generic] 1989 (3500 RPM)"
 msgstr "[Genel] 1989 (3500 RPM)"
 
@@ -2766,8 +2817,8 @@ msgstr "Aşağı taşı"
 msgid "Could not load file %1"
 msgstr "%1 dosyası yüklenemedi"
 
-msgid "Key Bindings:"
-msgstr "Tuş Bağlamaları:"
+msgid "Key bindings"
+msgstr "Tuş bağlamaları"
 
 msgid "Action"
 msgstr "Eylem"
@@ -2805,9 +2856,6 @@ msgstr "Tam ekran modunu ayarla"
 msgid "Toggle UI in fullscreen"
 msgstr "Arayüzü tam ekranda ayarla"
 
-msgid "Screenshot"
-msgstr "Ekran görüntüsü"
-
 msgid "Release mouse pointer"
 msgstr "Fare imlecini serbest bırak"
 
@@ -2832,8 +2880,8 @@ msgstr "Yerel Switch"
 msgid "Remote Switch"
 msgstr "Uzak Switch"
 
-msgid "Switch:"
-msgstr "Switch:"
+msgid "Shared secret:"
+msgstr "Paylaşılan sır:"
 
 msgid "Hub Mode"
 msgstr "Hub Modu"
@@ -3010,4 +3058,13 @@ msgid "&Allow recompilation"
 msgstr "&Derlenmesine izin ver"
 
 msgid "&Fast forward"
-msgstr ""
+msgstr "&İleri sar"
+
+msgid "Fast forward"
+msgstr "İleri sar"
+
+msgid "To change the system directory, stop all running machines."
+msgstr "Sistem dizinini değiştirmek için tüm çalışan makineleri durdurun."
+
+msgid "Raw"
+msgstr "Ham"
