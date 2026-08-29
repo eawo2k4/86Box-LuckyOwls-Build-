@@ -453,6 +453,48 @@ host_arm64_AND_REG_V(codeblock_t *block, int dst_reg, int src_n_reg, int src_m_r
 }
 
 void
+host_arm64_AND8_REG_IMM(codeblock_t *block, int dst_reg, uint8_t imm_data)
+{
+    host_arm64_AND_IMM(block, dst_reg, dst_reg, (uint32_t) imm_data | 0xffffff00);
+}
+
+void
+host_arm64_AND16_REG_IMM(codeblock_t *block, int dst_reg, uint16_t imm_data)
+{
+    host_arm64_AND_IMM(block, dst_reg, dst_reg, (uint32_t) imm_data | 0xffff0000);
+}
+
+void
+host_arm64_AND32_REG_IMM(codeblock_t *block, int dst_reg, uint32_t imm_data)
+{
+    host_arm64_AND_IMM(block, dst_reg, dst_reg, imm_data);
+}
+
+void
+host_arm64_AND8_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    if (dst_reg == src_reg)
+        return;
+    host_arm64_AND_REG(block, REG_TEMP, dst_reg, src_reg, 0);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+}
+
+void
+host_arm64_AND16_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    if (dst_reg == src_reg)
+        return;
+    host_arm64_AND_REG(block, REG_TEMP, dst_reg, src_reg, 0);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+}
+
+void
+host_arm64_AND32_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_AND_REG(block, dst_reg, dst_reg, src_reg, 0);
+}
+
+void
 host_arm64_ANDS_IMM(codeblock_t *block, int dst_reg, int src_n_reg, uint32_t imm_data)
 {
     uint32_t imm_encoding = host_arm64_find_imm(imm_data);
@@ -875,6 +917,44 @@ host_arm64_EOR_REG_V(codeblock_t *block, int dst_reg, int src_n_reg, int src_m_r
 }
 
 void
+host_arm64_EOR8_REG_IMM(codeblock_t *block, int dst_reg, uint8_t imm_data)
+{
+    host_arm64_EOR_IMM(block, dst_reg, dst_reg, (uint32_t) imm_data & 0xff);
+}
+
+void
+host_arm64_EOR16_REG_IMM(codeblock_t *block, int dst_reg, uint16_t imm_data)
+{
+    host_arm64_EOR_IMM(block, dst_reg, dst_reg, (uint32_t) imm_data & 0xffff);
+}
+
+void
+host_arm64_EOR32_REG_IMM(codeblock_t *block, int dst_reg, uint32_t imm_data)
+{
+    host_arm64_EOR_IMM(block, dst_reg, dst_reg, imm_data);
+}
+
+void
+host_arm64_EOR8_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_EOR_REG(block, REG_TEMP, dst_reg, src_reg, 0);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+}
+
+void
+host_arm64_EOR16_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_EOR_REG(block, REG_TEMP, dst_reg, src_reg, 0);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+}
+
+void
+host_arm64_EOR32_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_EOR_REG(block, dst_reg, dst_reg, src_reg, 0);
+}
+
+void
 host_arm64_FABS_D(codeblock_t *block, int dst_reg, int src_reg)
 {
     codegen_addlong(block, OPCODE_FABS_D | Rd(dst_reg) | Rn(src_reg));
@@ -1285,15 +1365,168 @@ host_arm64_ORR_REG_V(codeblock_t *block, int dst_reg, int src_n_reg, int src_m_r
 }
 
 void
+host_arm64_ORR8_REG_IMM(codeblock_t *block, int dst_reg, uint8_t imm_data)
+{
+    host_arm64_ORR_IMM(block, dst_reg, dst_reg, (uint32_t) imm_data & 0xff);
+}
+
+void
+host_arm64_ORR16_REG_IMM(codeblock_t *block, int dst_reg, uint16_t imm_data)
+{
+    host_arm64_ORR_IMM(block, dst_reg, dst_reg, (uint32_t) imm_data & 0xffff);
+}
+
+void
+host_arm64_ORR32_REG_IMM(codeblock_t *block, int dst_reg, uint32_t imm_data)
+{
+    host_arm64_ORR_IMM(block, dst_reg, dst_reg, imm_data);
+}
+
+void
+host_arm64_ORR8_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_ORR_REG(block, REG_TEMP, dst_reg, src_reg, 0);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+}
+
+void
+host_arm64_ORR16_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_ORR_REG(block, REG_TEMP, dst_reg, src_reg, 0);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+}
+
+void
+host_arm64_ORR32_REG_REG(codeblock_t *block, int dst_reg, int src_reg)
+{
+    host_arm64_ORR_REG(block, dst_reg, dst_reg, src_reg, 0);
+}
+
+void
 host_arm64_RET(codeblock_t *block, int reg)
 {
     codegen_addlong(block, OPCODE_RET | Rn(reg));
 }
 
 void
+host_arm64_ROL8_IMM(codeblock_t *block, int dst_reg, int shift)
+{
+    if (shift & 7) {
+        host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 8);
+        host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 8);
+        host_arm64_MOV_REG_LSR(block, REG_TEMP, REG_TEMP, 8 - (shift & 7));
+        host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+    }
+}
+
+void
+host_arm64_ROL16_IMM(codeblock_t *block, int dst_reg, int shift)
+{
+    if (shift & 15) {
+        host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 16);
+        host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 16);
+        host_arm64_MOV_REG_LSR(block, REG_TEMP, REG_TEMP, 16 - (shift & 15));
+        host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+    }
+}
+
+void
+host_arm64_ROL32_IMM(codeblock_t *block, int dst_reg, int shift)
+{
+    if (shift & 31)
+        host_arm64_MOV_REG_ROR(block, dst_reg, dst_reg, 32 - (shift & 31));
+}
+
+void
+host_arm64_ROL8_REG(codeblock_t *block, int dst_reg, int shift_reg)
+{
+    host_arm64_mov_imm(block, REG_TEMP2, 8);
+    host_arm64_SUB_REG(block, REG_TEMP2, REG_TEMP2, shift_reg, 0);
+    host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 8);
+    host_arm64_AND_IMM(block, REG_TEMP2, REG_TEMP2, 7);
+    host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 8);
+    host_arm64_LSR(block, REG_TEMP, REG_TEMP, REG_TEMP2);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+}
+
+void
+host_arm64_ROL16_REG(codeblock_t *block, int dst_reg, int shift_reg)
+{
+    host_arm64_mov_imm(block, REG_TEMP2, 16);
+    host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 16);
+    host_arm64_SUB_REG(block, REG_TEMP2, REG_TEMP2, shift_reg, 0);
+    host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 16);
+    host_arm64_ROR(block, REG_TEMP, REG_TEMP, REG_TEMP2);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+}
+
+void
+host_arm64_ROL32_REG(codeblock_t *block, int dst_reg, int shift_reg)
+{
+    host_arm64_mov_imm(block, REG_TEMP2, 32);
+    host_arm64_SUB_REG(block, REG_TEMP2, REG_TEMP2, shift_reg, 0);
+    host_arm64_ROR(block, dst_reg, dst_reg, REG_TEMP2);
+}
+
+void
 host_arm64_ROR(codeblock_t *block, int dst_reg, int src_n_reg, int shift_reg)
 {
     codegen_addlong(block, OPCODE_ROR | Rd(dst_reg) | Rn(src_n_reg) | Rm(shift_reg));
+}
+
+void
+host_arm64_ROR8_IMM(codeblock_t *block, int dst_reg, int shift)
+{
+    if (shift & 7) {
+        host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 8);
+        host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 8);
+        host_arm64_MOV_REG_LSR(block, REG_TEMP, REG_TEMP, shift & 7);
+        host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+    }
+}
+
+void
+host_arm64_ROR16_IMM(codeblock_t *block, int dst_reg, int shift)
+{
+    if (shift & 15) {
+        host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 16);
+        host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 16);
+        host_arm64_MOV_REG_LSR(block, REG_TEMP, REG_TEMP, shift & 15);
+        host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+    }
+}
+
+void
+host_arm64_ROR32_IMM(codeblock_t *block, int dst_reg, int shift)
+{
+    if (shift & 31)
+        host_arm64_MOV_REG_ROR(block, dst_reg, dst_reg, shift & 31);
+}
+
+void
+host_arm64_ROR8_REG(codeblock_t *block, int dst_reg, int shift_reg)
+{
+    host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 8);
+    host_arm64_AND_IMM(block, REG_TEMP2, shift_reg, 7);
+    host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 8);
+    host_arm64_LSR(block, REG_TEMP, REG_TEMP, REG_TEMP2);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 8);
+}
+
+void
+host_arm64_ROR16_REG(codeblock_t *block, int dst_reg, int shift_reg)
+{
+    host_arm64_UBFX(block, REG_TEMP, dst_reg, 0, 16);
+    host_arm64_AND_IMM(block, REG_TEMP2, shift_reg, 15);
+    host_arm64_ORR_REG(block, REG_TEMP, REG_TEMP, REG_TEMP, 16);
+    host_arm64_LSR(block, REG_TEMP, REG_TEMP, REG_TEMP2);
+    host_arm64_BFI(block, dst_reg, REG_TEMP, 0, 16);
+}
+
+void
+host_arm64_ROR32_REG(codeblock_t *block, int dst_reg, int shift_reg)
+{
+    host_arm64_ROR(block, dst_reg, dst_reg, shift_reg);
 }
 
 void
